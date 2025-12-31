@@ -30,12 +30,9 @@
             background: linear-gradient(135deg, var(--dark-blue) 0%, #1a1a2e 50%, var(--primary-blue) 100%);
             color: var(--light-text);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             padding: 20px;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
         /* Floating Hearts Background */
@@ -75,16 +72,54 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             width: 100%;
-            text-align: center;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
             position: relative;
             z-index: 1;
+            margin: 0 auto;
+            padding: 0 20px 40px;
+        }
+
+        .left-section {
+            flex: 0 0 400px;
+            position: sticky;
+            top: 20px;
+            text-align: center;
+        }
+
+        .right-section {
+            flex: 1;
+            overflow-y: auto;
+            max-height: 85vh;
+            padding-right: 20px;
+        }
+
+        .right-section::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .right-section::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .right-section::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
+            border-radius: 10px;
+        }
+
+        .right-section::-webkit-scrollbar-thumb:hover {
+            background: var(--cyber-blue);
         }
 
         .header {
-            margin-bottom: 50px;
+            text-align: center;
+            margin: 0 auto 40px;
             animation: slideDown 0.8s ease;
+            max-width: 1200px;
         }
 
         @keyframes slideDown {
@@ -113,17 +148,13 @@
         }
 
         .gift-container {
-            position: sticky;
-            top: 20px;
-            margin: 60px auto 40px;
-            animation: fadeIn 1s ease 0.5s both;
-            z-index: 100;
             background: linear-gradient(135deg, rgba(10, 77, 143, 0.3), rgba(26, 26, 46, 0.5));
             padding: 30px;
             border-radius: 20px;
             border: 2px solid var(--accent-blue);
             box-shadow: 0 0 40px rgba(30, 136, 229, 0.4);
             backdrop-filter: blur(10px);
+            animation: fadeIn 1s ease 0.5s both;
         }
 
         @keyframes fadeIn {
@@ -172,9 +203,18 @@
         }
 
         .reasons-display {
-            margin-top: 30px;
             min-height: 200px;
-            padding-bottom: 100px;
+        }
+
+        .reasons-intro {
+            text-align: center;
+            color: var(--bright-blue);
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(10, 77, 143, 0.2);
+            border-radius: 10px;
+            border: 1px solid var(--accent-blue);
         }
 
         .reason {
@@ -296,6 +336,7 @@
             border-radius: 10px;
             box-shadow: 0 5px 25px rgba(30, 136, 229, 0.5);
             transition: all 0.3s ease;
+            width: 100%;
         }
 
         .back-btn:hover {
@@ -303,7 +344,36 @@
             box-shadow: 0 8px 35px rgba(0, 217, 255, 0.7);
         }
 
+        @media (max-width: 968px) {
+            .header {
+                margin-bottom: 30px;
+            }
+
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .left-section {
+                flex: none;
+                width: 100%;
+                max-width: 400px;
+                position: relative;
+                top: 0;
+            }
+
+            .right-section {
+                width: 100%;
+                max-height: none;
+                overflow-y: visible;
+            }
+        }
+
         @media (max-width: 768px) {
+            .header {
+                margin-bottom: 25px;
+            }
+
             h1 {
                 font-size: 2rem;
             }
@@ -312,9 +382,12 @@
                 font-size: 1.2rem;
             }
 
+            .left-section {
+                max-width: 100%;
+            }
+
             .gift-container {
                 padding: 20px;
-                margin: 30px auto 30px;
             }
 
             .gift-icon {
@@ -362,9 +435,17 @@
                 padding: 12px 30px;
                 font-size: 1rem;
             }
+
+            .reasons-intro {
+                font-size: 1.2rem;
+            }
         }
 
         @media (max-width: 480px) {
+            .header {
+                margin-bottom: 20px;
+            }
+
             h1 {
                 font-size: 1.5rem;
             }
@@ -373,9 +454,13 @@
                 font-size: 1rem;
             }
 
+            .container {
+                padding: 0 10px 20px;
+                gap: 20px;
+            }
+
             .gift-container {
                 padding: 15px;
-                margin: 20px auto 20px;
             }
 
             .gift-icon {
@@ -415,8 +500,11 @@
             }
 
             .back-btn {
-                width: 100%;
                 padding: 12px 20px;
+            }
+
+            .reasons-intro {
+                font-size: 1rem;
             }
         }
     </style>
@@ -424,29 +512,40 @@
 <body>
     <div class="heart-bg" id="heartBg"></div>
 
+    <!-- Header centered at top -->
+    <div class="header">
+        <h1>💝 Razones Especiales 💝</h1>
+        <p class="subtitle">Descubre por qué eres tan especial para mí</p>
+    </div>
+
+    <!-- Two-column layout below -->
     <div class="container">
-        <div class="header">
-            <h1>💝 Razones Especiales 💝</h1>
-            <p class="subtitle">Descubre por qué eres tan especial para mí</p>
-        </div>
-
-        <div class="gift-container">
-            <div class="gift-box" id="giftBox">
-                <div class="gift-icon">🎁</div>
+        <!-- Left Section: Gift Box -->
+        <div class="left-section">
+            <div class="gift-container">
+                <div class="gift-box" id="giftBox">
+                    <div class="gift-icon">🎁</div>
+                </div>
+                <p class="instruction" id="instruction">Da clic o pícale al regalo y descubre por qué eres especial para mí 💙</p>
+                <p class="counter" id="counter">0 razones descubiertas</p>
             </div>
-            <p class="instruction" id="instruction">Da clic o pícale al regalo y descubre por qué eres especial para mí 💙</p>
-            <p class="counter" id="counter">0 razones descubiertas</p>
+
+            <button class="back-btn" onclick="window.location.href='index.html'">🔙 Volver al Inicio</button>
         </div>
 
-        <div class="reasons-display" id="reasonsDisplay"></div>
+        <!-- Right Section: Reasons Display -->
+        <div class="right-section">
+            <div class="reasons-intro">
+                ✨ Las razones aparecerán aquí... ✨
+            </div>
+            <div class="reasons-display" id="reasonsDisplay"></div>
 
-        <div class="final-message" id="finalMessage">
-            <h2>✨ Y hay muchas más razones... ✨</h2>
-            <p>Eres una persona increíble Cynthia, y cada día descubro más razones para valorarte. Gracias por ser parte de mi vida 💙</p>
-            <p style="margin-top: 20px; font-size: 1.8rem; color: var(--cyber-blue);">Con cariño, Valencia</p>
+            <div class="final-message" id="finalMessage">
+                <h2>✨ Y hay muchas más razones... ✨</h2>
+                <p>Eres una persona increíble Cynthia, y cada día descubro más razones para valorarte. Gracias por ser parte de mi vida 💙</p>
+                <p style="margin-top: 20px; font-size: 1.8rem; color: var(--cyber-blue);">Con cariño, Valencia</p>
+            </div>
         </div>
-
-        <button class="back-btn" onclick="window.location.href='index.html'">🔙 Volver al Inicio</button>
     </div>
 
     <script>
@@ -493,6 +592,11 @@
         // Gift box click handler
         giftBox.addEventListener('click', function() {
             if (currentReason < reasons.length) {
+                // Hide intro text on first click
+                if (currentReason === 0) {
+                    document.querySelector('.reasons-intro').style.display = 'none';
+                }
+
                 // Shake animation
                 giftBox.classList.add('shake');
                 setTimeout(() => {
