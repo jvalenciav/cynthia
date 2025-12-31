@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Cynthia 💙</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0a4d8f;
+            --accent-blue: #1e88e5;
+            --bright-blue: #42a5f5;
+            --dark-blue: #062949;
+            --cyber-blue: #00d9ff;
+            --dark-bg: #0d0d0d;
+            --light-text: #e0e0e0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--dark-bg) 50%, var(--primary-blue) 100%);
+            color: var(--light-text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(66, 165, 245, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: bgMove 20s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes bgMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        /* Initial Button */
+        .start-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            color: white;
+            border: none;
+            padding: 25px 60px;
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(30, 136, 229, 0.6);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 10px 40px rgba(30, 136, 229, 0.6);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 15px 60px rgba(0, 217, 255, 0.9);
+                transform: scale(1.05);
+            }
+        }
+
+        .start-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 60px rgba(0, 217, 255, 1);
+        }
+
+        .start-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -200%; }
+            100% { left: 200%; }
+        }
+
+        .start-button.fade-out {
+            animation: fadeOut 0.8s ease forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+        }
+
+        /* Message Container */
+        .message-container {
+            display: none;
+            opacity: 0;
+            background: linear-gradient(135deg, rgba(10, 77, 143, 0.3), rgba(6, 41, 73, 0.4));
+            padding: 60px;
+            border-radius: 20px;
+            border: 2px solid var(--accent-blue);
+            box-shadow: 0 0 60px rgba(30, 136, 229, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .message-container.active {
+            display: block;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .greeting {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: var(--cyber-blue);
+            margin-bottom: 40px;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+        }
+
+        .message-text {
+            font-size: 1.6rem;
+            line-height: 2;
+            color: var(--light-text);
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .message-text p {
+            margin-bottom: 25px;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 50px;
+            font-size: 1.4rem;
+            color: var(--bright-blue);
+            font-style: italic;
+        }
+
+        .signature-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--cyber-blue);
+            margin-top: 10px;
+            text-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
+        }
+
+        /* Typing cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.4rem;
+            background-color: var(--cyber-blue);
+            margin-left: 5px;
+            animation: blink 0.7s infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        /* Continue Button */
+        .continue-btn {
+            display: none;
+            margin-top: 40px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 5px 30px rgba(30, 136, 229, 0.6);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 40px rgba(0, 217, 255, 0.8);
+        }
+
+        .continue-btn.show {
+            display: block;
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .start-button {
+                padding: 20px 40px;
+                font-size: 1.5rem;
+            }
+
+            .message-container {
+                padding: 40px 30px;
+            }
+
+            .greeting {
+                font-size: 2rem;
+            }
+
+            .message-text {
+                font-size: 1.3rem;
+                line-height: 1.8;
+            }
+
+            .signature {
+                font-size: 1.2rem;
+            }
+
+            .signature-name {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .start-button {
+                padding: 18px 35px;
+                font-size: 1.2rem;
+            }
+
+            .message-container {
+                padding: 30px 20px;
+            }
+
+            .greeting {
+                font-size: 1.6rem;
+                margin-bottom: 30px;
+            }
+
+            .message-text {
+                font-size: 1.1rem;
+                line-height: 1.7;
+            }
+
+            .signature {
+                font-size: 1rem;
+                margin-top: 30px;
+            }
+
+            .signature-name {
+                font-size: 1.3rem;
+            }
+
+            .continue-btn {
+                font-size: 1.1rem;
+                padding: 15px 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Initial Button -->
+        <button class="start-button" id="startBtn">Ven... vamos...</button>
+
+        <!-- Message Container -->
+        <div class="message-container" id="messageContainer">
+            <h1 class="greeting" id="greeting"></h1>
+            <div class="message-text" id="messageText"></div>
+            <div class="signature">
+                <p id="signatureText"></p>
+                <p class="signature-name" id="signatureName"></p>
+            </div>
+            <button class="continue-btn" id="continueBtn" onclick="window.location.href='quiz.html'">
+                CONTINUAR 💙
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const messageContainer = document.getElementById('messageContainer');
+        const greetingElement = document.getElementById('greeting');
+        const messageTextElement = document.getElementById('messageText');
+        const signatureTextElement = document.getElementById('signatureText');
+        const signatureNameElement = document.getElementById('signatureName');
+        const continueBtn = document.getElementById('continueBtn');
+
+        const greeting = "Hola Preciosa...";
+        
+        const messages = [
+            "Quería dedicarte un espacio hecho con todo el cariño y creatividad.",
+            "Es solo un detalle para mostrarte que, incluso en las cosas que me apasionan, tú estas presente.",
+            "Espero que te guste y que sea solo el comienzo de algo más, posteriormente ira creciendo con sorpresas y momentos jutntos."
+        ];
+
+        const signatureText = "Con mucha ilusión, tu mayor admirador y tu NO duo ...";
+        const signatureName = "Juan Carlos Valencia";
+
+        let currentMessageIndex = 0;
+        let typingSpeed = 50; // milliseconds per character
+
+        startBtn.addEventListener('click', function() {
+            startBtn.classList.add('fade-out');
+            
+            setTimeout(() => {
+                startBtn.style.display = 'none';
+                messageContainer.classList.add('active');
+                
+                setTimeout(() => {
+                    typeGreeting();
+                }, 500);
+            }, 800);
+        });
+
+        function typeGreeting() {
+            typeText(greetingElement, greeting, 0, () => {
+                setTimeout(() => {
+                    typeMessages();
+                }, 800);
+            });
+        }
+
+        function typeMessages() {
+            if (currentMessageIndex < messages.length) {
+                const p = document.createElement('p');
+                messageTextElement.appendChild(p);
+                
+                typeText(p, messages[currentMessageIndex], 0, () => {
+                    currentMessageIndex++;
+                    setTimeout(() => {
+                        typeMessages();
+                    }, 500);
+                });
+            } else {
+                setTimeout(() => {
+                    typeSignature();
+                }, 800);
+            }
+        }
+
+        function typeSignature() {
+            typeText(signatureTextElement, signatureText, 0, () => {
+                setTimeout(() => {
+                    typeText(signatureNameElement, signatureName, 0, () => {
+                        setTimeout(() => {
+                            continueBtn.classList.add('show');
+                        }, 500);
+                    });
+                }, 500);
+            });
+        }
+
+        function typeText(element, text, index, callback) {
+            if (index < text.length) {
+                element.textContent += text.charAt(index);
+                
+                // Add cursor while typing
+                const cursor = document.createElement('span');
+                cursor.className = 'typing-cursor';
+                element.appendChild(cursor);
+                
+                setTimeout(() => {
+                    // Remove cursor before next character
+                    if (element.querySelector('.typing-cursor')) {
+                        element.querySelector('.typing-cursor').remove();
+                    }
+                    typeText(element, text, index + 1, callback);
+                }, typingSpeed);
+            } else {
+                // Remove final cursor
+                if (element.querySelector('.typing-cursor')) {
+                    element.querySelector('.typing-cursor').remove();
+                }
+                if (callback) callback();
+            }
+        }
+    </script>
+</body>
+</html>
