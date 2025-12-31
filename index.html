@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission: Para la persona mas especial... Cynthia</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Scanlines Effect -->
+    <div class="scanlines"></div>
+    <div class="overlay"></div>
+
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="screen active">
+        <div class="glitch-container">
+            <h1 class="glitch" data-text="CLASSIFIED">CLASSIFIED</h1>
+        </div>
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+        <p class="loading-text">CONNECTING TO MATCH...</p>
+        <div class="military-code">
+            <span>TARGET: CYNTHIA ঐ</span>
+            <span>STATUS: LOADING MISSION DATA...</span>
+            <span>ENCRYPTION: ACTIVE</span>
+        </div>
+    </div>
+
+    <!-- Intro Screen -->
+    <div id="introScreen" class="screen">
+        <div class="mission-briefing">
+            <div class="classified-stamp">TOP SECRET</div>
+            <h1 class="mission-title">MISSION BRIEFING</h1>
+            <h2 class="mission-subtitle">Para la persona más especial...</h2>
+            <div class="target-info">
+                <div class="target-line">
+                    <span class="label">OPERADOR:</span>
+                    <span class="value">CYNTHIA ঐ</span>
+                </div>
+                <div class="target-line">
+                    <span class="label">MISION:</span>
+                    <span class="value">DEMOSTRAR CONOCIMIENTO</span>
+                </div>
+                <div class="target-line">
+                    <span class="label">DIFICULTAD:</span>
+                    <span class="value">LEGENDARY</span>
+                </div>
+            </div>
+            <p class="briefing-text">
+                Hola guapa, preparé esta misión especial para ti. 
+                Responde estas preguntas y demuestra que nadie te conoce mejor que tú misma.
+            </p>
+            <button id="startBtn" class="military-btn">
+                <span>INICIAR MISIÓN</span>
+                <div class="btn-shine"></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Quiz Screen -->
+    <div id="quizScreen" class="screen">
+        <div class="hud">
+            <div class="hud-item">
+                <span class="hud-label">PREGUNTA</span>
+                <span id="questionNumber" class="hud-value">1/5</span>
+            </div>
+            <div class="hud-item score-display">
+                <span class="hud-label">PUNTOS</span>
+                <span id="score" class="hud-value">0</span>
+            </div>
+        </div>
+
+        <div class="quiz-container">
+            <h2 id="question" class="question-text"></h2>
+            <div id="answersContainer" class="answers-grid"></div>
+        </div>
+
+        <div class="progress-bar-container">
+            <div id="progressBar" class="progress-bar"></div>
+        </div>
+    </div>
+
+    <!-- Results Screen -->
+    <div id="resultsScreen" class="screen">
+        <div class="results-container">
+            <div id="rankBadge" class="rank-badge"></div>
+            <h1 id="resultTitle" class="result-title"></h1>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-value" id="finalScore">0</span>
+                    <span class="stat-label">PUNTOS TOTALES</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="correctAnswers">0</span>
+                    <span class="stat-label">CORRECTAS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="accuracy">0%</span>
+                    <span class="stat-label">PRECISIÓN</span>
+                </div>
+            </div>
+            <p id="resultMessage" class="result-message"></p>
+            <button id="revealBtn" class="military-btn pulse">
+                <span>🎁 DESBLOQUEAR RECOMPENSA</span>
+                <div class="btn-shine"></div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Final Reward Screen -->
+    <div id="rewardScreen" class="screen">
+        <div class="reward-container">
+            <div class="reward-icon">🎯</div>
+            <h1 class="reward-title">MISIÓN COMPLETADA</h1>
+            <div class="reward-box">
+                <div class="reward-shine"></div>
+                <p class="reward-message">
+                    Bueno guapa, espero que te haya gustado este detalle... recuerdas que una vez te dije que me desvelé un poco... pues fue porque estaba trabajando en este detalle para ti... espero y te guste...
+                </p>
+            </div>
+            <div class="signature">
+                <p>Con cariño,</p>
+                <p class="signature-name">Valencia</p>
+            </div>
+            <button id="restartBtn" class="military-btn secondary">
+                <span>REINICIAR MISIÓN</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
