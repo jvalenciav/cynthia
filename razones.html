@@ -113,9 +113,17 @@
         }
 
         .gift-container {
-            position: relative;
-            margin: 60px auto;
+            position: sticky;
+            top: 20px;
+            margin: 60px auto 40px;
             animation: fadeIn 1s ease 0.5s both;
+            z-index: 100;
+            background: linear-gradient(135deg, rgba(10, 77, 143, 0.3), rgba(26, 26, 46, 0.5));
+            padding: 30px;
+            border-radius: 20px;
+            border: 2px solid var(--accent-blue);
+            box-shadow: 0 0 40px rgba(30, 136, 229, 0.4);
+            backdrop-filter: blur(10px);
         }
 
         @keyframes fadeIn {
@@ -164,8 +172,9 @@
         }
 
         .reasons-display {
-            margin-top: 50px;
+            margin-top: 30px;
             min-height: 200px;
+            padding-bottom: 100px;
         }
 
         .reason {
@@ -303,6 +312,11 @@
                 font-size: 1.2rem;
             }
 
+            .gift-container {
+                padding: 20px;
+                margin: 30px auto 30px;
+            }
+
             .gift-icon {
                 font-size: 6rem;
             }
@@ -357,6 +371,11 @@
 
             .subtitle {
                 font-size: 1rem;
+            }
+
+            .gift-container {
+                padding: 15px;
+                margin: 20px auto 20px;
             }
 
             .gift-icon {
@@ -511,11 +530,6 @@
             reasonDiv.classList.add('reason');
             reasonDiv.textContent = text;
             reasonsDisplay.appendChild(reasonDiv);
-
-            // Scroll to the new reason
-            setTimeout(() => {
-                reasonDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
         }
 
         function createConfetti() {
