@@ -299,8 +299,21 @@
                 font-size: 2rem;
             }
 
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
             .gift-icon {
                 font-size: 6rem;
+            }
+
+            .gift-box {
+                width: 150px;
+                height: 150px;
+            }
+
+            .instruction {
+                font-size: 1.1rem;
             }
 
             .reason {
@@ -308,8 +321,83 @@
                 padding: 20px 50px;
             }
 
+            .reason::before,
+            .reason::after {
+                font-size: 1.5rem;
+                left: 10px;
+            }
+
+            .reason::after {
+                right: 10px;
+                left: auto;
+            }
+
+            .final-message {
+                padding: 30px 20px;
+            }
+
+            .final-message h2 {
+                font-size: 2rem;
+            }
+
             .final-message p {
                 font-size: 1.2rem;
+            }
+
+            .back-btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .gift-icon {
+                font-size: 5rem;
+            }
+
+            .gift-box {
+                width: 120px;
+                height: 120px;
+            }
+
+            .instruction {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+
+            .reason {
+                font-size: 1.1rem;
+                padding: 15px 40px;
+            }
+
+            .reason::before,
+            .reason::after {
+                font-size: 1.2rem;
+            }
+
+            .final-message h2 {
+                font-size: 1.5rem;
+            }
+
+            .final-message p {
+                font-size: 1rem;
+            }
+
+            .counter {
+                font-size: 1rem;
+            }
+
+            .back-btn {
+                width: 100%;
+                padding: 12px 20px;
             }
         }
     </style>
