@@ -310,34 +310,72 @@
 
         /* iPad Horizontal */
         @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+            body {
+                padding: 10px;
+            }
+
             .container {
-                max-width: 85%;
-                padding: 25px 20px;
+                max-width: 98%;
+                padding: 15px 12px;
             }
 
             h1 {
-                font-size: 2.2rem;
+                font-size: 1.5rem;
+                margin-bottom: 12px;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 15px;
+            }
+
+            .icon {
+                font-size: 2rem;
+                margin-bottom: 12px;
+            }
+
+            .date-selector {
+                padding: 15px 12px;
+            }
+
+            label {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+            }
+
+            input[type="date"] {
+                font-size: 0.85rem;
+                padding: 10px;
+                max-width: 90%;
             }
 
             .countdown-display {
                 grid-template-columns: repeat(4, 1fr);
-                gap: 15px;
+                gap: 8px;
+                margin: 15px 0;
             }
 
             .countdown-item {
-                padding: 20px 15px;
+                padding: 12px 8px;
             }
 
             .countdown-value {
-                font-size: 2.5rem;
+                font-size: 1.8rem;
             }
 
             .countdown-label {
-                font-size: 1rem;
+                font-size: 0.7rem;
             }
 
-            input[type="date"] {
-                max-width: 80%;
+            .message {
+                font-size: 0.85rem;
+                padding: 12px;
+                margin: 15px 0;
+            }
+
+            .back-link {
+                font-size: 0.8rem;
+                padding: 10px 20px;
             }
         }
     </style>
@@ -346,8 +384,8 @@
     <div class="container">
         <div class="header">
             <div class="icon">💙⏰</div>
-            <h1>Tiempo Para conocernos...</h1>
-            <p class="subtitle">Cynthia ঐ</p>
+            <h1>Tiempo Para Estar Juntos</h1>
+            <p class="subtitle">Cuenta regresiva especial para ti Cynthia ঐ</p>
         </div>
 
         <div class="date-selector" id="dateSelector">
