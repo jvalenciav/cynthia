@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para Cynthia 💙</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,11 +55,12 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 95%;
             width: 100%;
             position: relative;
             z-index: 1;
             text-align: center;
+            padding: 0 20px;
         }
 
         /* Initial Button */
@@ -308,6 +309,36 @@
             .continue-btn {
                 font-size: 1.1rem;
                 padding: 15px 35px;
+            }
+        }
+
+        /* iPad Horizontal */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+            .container {
+                max-width: 90%;
+                padding: 20px;
+            }
+
+            .start-button {
+                font-size: 1.8rem;
+                padding: 20px 50px;
+            }
+
+            .message-box {
+                padding: 40px 30px;
+                max-width: 85%;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .greeting {
+                font-size: 1.4rem;
+            }
+
+            .message-text {
+                font-size: 1rem;
             }
         }
     </style>
