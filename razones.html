@@ -223,7 +223,7 @@
             border-radius: 15px;
             border: 2px solid var(--accent-blue);
             margin: 20px 0;
-            font-size: 1rem;
+            font-size: 1.8rem;
             color: var(--light-text);
             box-shadow: 0 0 40px rgba(30, 136, 229, 0.4);
             opacity: 0;
@@ -234,7 +234,7 @@
         }
 
         .reason::before {
-            content: '';
+            content: '💙';
             position: absolute;
             left: 20px;
             top: 50%;
@@ -404,7 +404,7 @@
             }
 
             .reason {
-                font-size: 1rem;
+                font-size: 1.3rem;
                 padding: 20px 50px;
             }
 
@@ -505,6 +505,42 @@
 
             .reasons-intro {
                 font-size: 1rem;
+            }
+        }
+
+        /* iPad Horizontal */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+            .two-column-container {
+                grid-template-columns: 40% 60%;
+                max-width: 95%;
+                gap: 20px;
+            }
+
+            .gift-section {
+                padding: 20px;
+            }
+
+            .gift-box {
+                width: 200px;
+                height: 200px;
+            }
+
+            .reasons-section {
+                padding: 20px 15px;
+                max-height: 70vh;
+            }
+
+            .reason {
+                font-size: 1.4rem;
+                padding: 20px 30px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .reasons-intro {
+                font-size: 1.1rem;
             }
         }
     </style>
