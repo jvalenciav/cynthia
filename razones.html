@@ -510,37 +510,104 @@
 
         /* iPad Horizontal */
         @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-            .two-column-container {
-                grid-template-columns: 40% 60%;
-                max-width: 95%;
-                gap: 20px;
+            body {
+                padding: 10px;
             }
 
-            .gift-section {
-                padding: 20px;
-            }
-
-            .gift-box {
-                width: 200px;
-                height: 200px;
-            }
-
-            .reasons-section {
-                padding: 20px 15px;
-                max-height: 70vh;
-            }
-
-            .reason {
-                font-size: 1.4rem;
-                padding: 20px 30px;
+            .header-section {
+                padding: 15px 10px;
+                margin-bottom: 10px;
             }
 
             h1 {
-                font-size: 2rem;
+                font-size: 1.4rem;
+                margin-bottom: 8px;
+            }
+
+            .subtitle {
+                font-size: 0.8rem;
+            }
+
+            .two-column-container {
+                grid-template-columns: 35% 65%;
+                max-width: 98%;
+                gap: 12px;
+                padding: 0 8px;
+            }
+
+            .gift-section {
+                padding: 12px 8px;
+            }
+
+            .gift-box {
+                width: 140px;
+                height: 140px;
+            }
+
+            .bow {
+                width: 50px;
+                height: 25px;
+            }
+
+            .bow::before,
+            .bow::after {
+                width: 25px;
+                height: 25px;
+            }
+
+            .gift-instructions {
+                font-size: 0.7rem;
+                margin-top: 12px;
+                padding: 8px;
+            }
+
+            .counter {
+                font-size: 0.75rem;
+                margin-top: 10px;
+            }
+
+            .reasons-section {
+                padding: 15px 10px;
+                max-height: 75vh;
             }
 
             .reasons-intro {
-                font-size: 1.1rem;
+                font-size: 0.85rem;
+                margin-bottom: 12px;
+            }
+
+            .reasons-list {
+                gap: 12px;
+            }
+
+            .reason {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+
+            .reason::before,
+            .reason::after {
+                font-size: 1rem;
+            }
+
+            .final-message {
+                margin-top: 15px;
+                padding: 15px;
+            }
+
+            .final-message h2 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+
+            .final-message p {
+                font-size: 0.8rem;
+            }
+
+            .back-btn {
+                padding: 10px 18px;
+                font-size: 0.75rem;
+                margin-top: 12px;
             }
         }
     </style>
