@@ -776,59 +776,103 @@ body {
     }
 
     .container {
-        max-width: 95%;
-        padding: 20px 15px;
-    }
-
-    .mission-briefing {
-        max-width: 90%;
-        padding: 30px 25px;
+        max-width: 98%;
+        padding: 10px 8px;
         margin: 0 auto;
     }
 
+    .mission-briefing {
+        max-width: 95%;
+        padding: 15px 12px;
+        margin: 10px auto;
+    }
+
     .quiz-container {
-        max-width: 90%;
-        padding: 20px 15px;
+        max-width: 95%;
+        padding: 10px 8px;
     }
 
     .mission-title {
-        font-size: 2.2rem;
+        font-size: 1.4rem;
+        margin-bottom: 10px;
     }
 
     .mission-subtitle {
-        font-size: 1.3rem;
+        font-size: 1rem;
+        margin-bottom: 15px;
     }
 
     .question-text {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
+        margin-bottom: 15px;
     }
 
     .answers-grid {
         grid-template-columns: 1fr 1fr;
-        gap: 15px;
+        gap: 10px;
     }
 
     .answer-btn {
-        padding: 18px;
-        font-size: 1rem;
+        padding: 12px 10px;
+        font-size: 0.85rem;
     }
 
     .stats-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 12px;
+    }
+
+    .stat-value {
+        font-size: 1.8rem;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
     }
 
     .hud {
-        padding: 12px 20px;
-        font-size: 0.95rem;
+        padding: 8px 12px;
+        font-size: 0.75rem;
+        gap: 8px;
     }
 
     .loading-bar-container {
-        width: 80%;
+        width: 85%;
     }
 
     .glitch {
-        font-size: 4rem;
+        font-size: 2.5rem;
+    }
+
+    .loading-text {
+        font-size: 0.9rem;
+    }
+
+    .military-code span {
+        font-size: 0.7rem;
+    }
+
+    .target-info {
+        padding: 12px;
+    }
+
+    .target-line {
+        font-size: 0.85rem;
+        margin: 8px 0;
+    }
+
+    .military-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+
+    .objective-item {
+        font-size: 0.85rem;
+        padding: 8px 12px;
     }
 }
 
