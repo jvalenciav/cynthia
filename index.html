@@ -314,31 +314,57 @@
 
         /* iPad Horizontal */
         @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+            body {
+                padding: 10px;
+            }
+
             .container {
-                max-width: 90%;
-                padding: 20px;
+                max-width: 98%;
+                padding: 10px;
             }
 
             .start-button {
-                font-size: 1.8rem;
-                padding: 20px 50px;
+                font-size: 1.3rem;
+                padding: 15px 35px;
             }
 
             .message-box {
-                padding: 40px 30px;
-                max-width: 85%;
+                padding: 20px 15px;
+                max-width: 95%;
             }
 
             h1 {
-                font-size: 2.5rem;
+                font-size: 1.6rem;
+                margin-bottom: 15px;
             }
 
             .greeting {
-                font-size: 1.4rem;
+                font-size: 1.1rem;
+                margin-bottom: 15px;
             }
 
             .message-text {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+
+            .signature {
+                font-size: 0.75rem;
+                margin-top: 15px;
+            }
+
+            .signature-name {
                 font-size: 1rem;
+            }
+
+            .continue-btn {
+                font-size: 0.9rem;
+                padding: 12px 25px;
+                margin-top: 15px;
+            }
+
+            .particles canvas {
+                opacity: 0.3;
             }
         }
     </style>
@@ -346,7 +372,7 @@
 <body>
     <div class="container">
         <!-- Initial Button -->
-        <button class="start-button" id="startBtn">Ven... vamos...</button>
+        <button class="start-button" id="startBtn">Ven... vamos</button>
 
         <!-- Message Container -->
         <div class="message-container" id="messageContainer">
