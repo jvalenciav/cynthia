@@ -315,56 +315,62 @@
         /* iPad Horizontal */
         @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
             body {
-                padding: 10px;
+                padding: 15px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
             }
 
             .container {
-                max-width: 98%;
-                padding: 10px;
+                max-width: 1366px !important;
+                width: 100%;
+                margin: 0 auto;
+                padding: 20px;
             }
 
             .start-button {
-                font-size: 1.3rem;
-                padding: 15px 35px;
+                font-size: 1.6rem;
+                padding: 18px 40px;
             }
 
             .message-box {
-                padding: 20px 15px;
-                max-width: 95%;
+                padding: 30px 25px;
+                max-width: 1200px;
+                margin: 0 auto;
             }
 
             h1 {
-                font-size: 1.6rem;
-                margin-bottom: 15px;
+                font-size: 2rem;
+                margin-bottom: 20px;
             }
 
             .greeting {
-                font-size: 1.1rem;
-                margin-bottom: 15px;
+                font-size: 1.3rem;
+                margin-bottom: 20px;
             }
 
             .message-text {
-                font-size: 0.85rem;
-                line-height: 1.5;
+                font-size: 1rem;
+                line-height: 1.6;
             }
 
             .signature {
-                font-size: 0.75rem;
-                margin-top: 15px;
+                font-size: 0.9rem;
+                margin-top: 20px;
             }
 
             .signature-name {
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
 
             .continue-btn {
-                font-size: 0.9rem;
-                padding: 12px 25px;
-                margin-top: 15px;
+                font-size: 1rem;
+                padding: 15px 30px;
+                margin-top: 20px;
             }
 
             .particles canvas {
-                opacity: 0.3;
+                opacity: 0.4;
             }
         }
     </style>
@@ -372,7 +378,7 @@
 <body>
     <div class="container">
         <!-- Initial Button -->
-        <button class="start-button" id="startBtn">Ven... vamos</button>
+        <button class="start-button" id="startBtn">Ven vamos....</button>
 
         <!-- Message Container -->
         <div class="message-container" id="messageContainer">
