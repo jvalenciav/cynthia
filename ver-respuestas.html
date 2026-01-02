@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Respuestas de Cynthia 💝</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            color: #FF1493;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .loading {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #FF1493;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .no-data {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .no-data h2 {
+            color: #FF1493;
+            margin-bottom: 20px;
+        }
+
+        .response-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .response-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #FFB6C1;
+        }
+
+        .response-date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .category {
+            margin-bottom: 30px;
+        }
+
+        .category-title {
+            color: #FF1493;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #FFB6C1;
+        }
+
+        .question-item {
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.1), rgba(255, 105, 180, 0.1));
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border-left: 4px solid #FF69B4;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: #2C3E50;
+            margin-bottom: 8px;
+        }
+
+        .answer-text {
+            color: #4CAF50;
+            font-size: 1.05rem;
+            font-weight: 500;
+        }
+
+        .important-alert {
+            background: #fff3cd;
+            border-left: 5px solid #ff9800;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .important-alert strong {
+            color: #ff6b00;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #FF1493;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 5px 20px rgba(255, 20, 147, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 25px rgba(255, 20, 147, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .response-header {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💝 Respuestas de Cynthia</h1>
+            <p>Panel de visualización de respuestas del cuestionario</p>
+            <button class="refresh-btn" onclick="loadResponses()" style="margin-top: 15px;">🔄 Actualizar</button>
+        </div>
+
+        <div id="stats" class="stats" style="display: none;"></div>
+        
+        <div id="loading" class="loading">
+            <div class="loading-spinner"></div>
+            <p>Cargando respuestas de Firebase...</p>
+        </div>
+
+        <div id="noData" class="no-data" style="display: none;">
+            <h2>📭 No hay respuestas todavía</h2>
+            <p>Cynthia aún no ha llenado el cuestionario.</p>
+            <p style="margin-top: 20px;">Asegúrate de haberle enviado el link:</p>
+            <code style="background: #f0f0f0; padding: 10px; display: block; margin-top: 10px; border-radius: 5px;">
+                https://tu-usuario.github.io/tu-repo/cuestionario.html
+            </code>
+        </div>
+
+        <div id="responses"></div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmefX4EdrExy-LFM-5G0Bx8-RfIBHFjos",
+            authDomain: "billar-204e7.firebaseapp.com",
+            projectId: "billar-204e7",
+            storageBucket: "billar-204e7.firebasestorage.app",
+            messagingSenderId: "953693612662",
+            appId: "1:953693612662:web:cd2e0b32c64417f61b4d57",
+            measurementId: "G-KJJR1QTYM7"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Make loadResponses global
+        window.loadResponses = loadResponses;
+
+        // Load responses on page load
+        loadResponses();
+
+        async function loadResponses() {
+            const loadingDiv = document.getElementById('loading');
+            const noDataDiv = document.getElementById('noData');
+            const responsesDiv = document.getElementById('responses');
+            const statsDiv = document.getElementById('stats');
+
+            // Show loading
+            loadingDiv.style.display = 'block';
+            noDataDiv.style.display = 'none';
+            responsesDiv.innerHTML = '';
+            statsDiv.style.display = 'none';
+
+            try {
+                // Query Firestore
+                const q = query(collection(db, "cynthiaEncuesta"), orderBy("timestamp", "desc"));
+                const querySnapshot = await getDocs(q);
+
+                // Hide loading
+                loadingDiv.style.display = 'none';
+
+                if (querySnapshot.empty) {
+                    noDataDiv.style.display = 'block';
+                    return;
+                }
+
+                // Show stats
+                statsDiv.style.display = 'grid';
+                statsDiv.innerHTML = `
+                    <div class="stat-card">
+                        <div class="stat-value">${querySnapshot.size}</div>
+                        <div class="stat-label">Respuestas Totales</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">26</div>
+                        <div class="stat-label">Preguntas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">6</div>
+                        <div class="stat-label">Categorías</div>
+                    </div>
+                `;
+
+                // Display each response
+                querySnapshot.forEach((doc, index) => {
+                    const data = doc.data();
+                    displayResponse(data, index + 1, doc.id);
+                });
+
+            } catch (error) {
+                console.error("Error loading responses:", error);
+                loadingDiv.style.display = 'none';
+                responsesDiv.innerHTML = `
+                    <div class="no-data">
+                        <h2>❌ Error al cargar respuestas</h2>
+                        <p>Error: ${error.message}</p>
+                        <p style="margin-top: 20px;">Verifica que:</p>
+                        <ul style="text-align: left; display: inline-block; margin-top: 10px;">
+                            <li>Firebase esté configurado correctamente</li>
+                            <li>Las reglas de Firestore permitan lectura</li>
+                            <li>Tienes conexión a internet</li>
+                        </ul>
+                    </div>
+                `;
+            }
+        }
+
+        function displayResponse(data, responseNumber, docId) {
+            const responsesDiv = document.getElementById('responses');
+            
+            // Create response card
+            const card = document.createElement('div');
+            card.className = 'response-card';
+
+            // Format date
+            let dateStr = 'Fecha no disponible';
+            if (data.fechaRespuesta) {
+                const date = new Date(data.fechaRespuesta);
+                dateStr = date.toLocaleString('es-MX', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+
+            // Header
+            card.innerHTML = `
+                <div class="response-header">
+                    <h2>💕 Respuesta #${responseNumber}</h2>
+                    <div class="response-date">📅 ${dateStr}</div>
+                </div>
+            `;
+
+            // Group questions by category
+            const categories = {};
+            
+            for (let i = 1; i <= 26; i++) {
+                const questionKey = `pregunta${i}`;
+                if (data[questionKey]) {
+                    const q = data[questionKey];
+                    const category = q.categoria || 'Sin categoría';
+                    
+                    if (!categories[category]) {
+                        categories[category] = [];
+                    }
+                    
+                    categories[category].push({
+                        pregunta: q.pregunta,
+                        respuesta: Array.isArray(q.respuesta) ? q.respuesta : [q.respuesta]
+                    });
+                }
+            }
+
+            // Display by category
+            Object.keys(categories).forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                categoryDiv.innerHTML = `<h3 class="category-title">${category}</h3>`;
+
+                categories[category].forEach(item => {
+                    const questionDiv = document.createElement('div');
+                    questionDiv.className = 'question-item';
+                    
+                    const answerText = item.respuesta.join(', ');
+                    
+                    questionDiv.innerHTML = `
+                        <div class="question-text">${item.pregunta}</div>
+                        <div class="answer-text">✓ ${answerText}</div>
+                    `;
+
+                    // Highlight allergies question
+                    if (item.pregunta.includes('alergia')) {
+                        questionDiv.innerHTML += `
+                            <div class="important-alert">
+                                <strong>⚠️ IMPORTANTE:</strong> Esta información es crítica para la seguridad de Cynthia.
+                            </div>
+                        `;
+                    }
+
+                    categoryDiv.appendChild(questionDiv);
+                });
+
+                card.appendChild(categoryDiv);
+            });
+
+            responsesDiv.appendChild(card);
+        }
+    </script>
+</body>
+</html>
