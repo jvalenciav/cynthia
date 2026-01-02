@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tiempo Para Vernos 💙</title>
+    <title>Tiempo para conocernos 💙</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -390,8 +390,8 @@
     <div class="container">
         <div class="header">
             <div class="icon">💙⏰</div>
-            <h1>Tiempo Para vernos</h1>
-            <p class="subtitle">Cynthia ঐ</p>
+            <h1>Tiempo Para conocernos</h1>
+            <p class="subtitle">Cynthia ঐ . </p>
         </div>
 
         <div class="date-selector" id="dateSelector">
@@ -433,7 +433,7 @@
     <script type="module">
         // Import Firebase SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
 
         // Firebase configuration
         const firebaseConfig = {
@@ -457,12 +457,34 @@
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('targetDate').setAttribute('min', today);
 
-        // Load saved date if exists
-        const savedDate = localStorage.getItem('targetDate');
-        if (savedDate) {
-            document.getElementById('targetDate').value = savedDate;
-            startCountdown();
+        // Load saved date from Firebase when page loads
+        async function loadSavedDate() {
+            try {
+                // Reference to THE SINGLE document (fixed ID)
+                const docRef = doc(db, "fechaCynthia", "fechaActual");
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    const savedDate = data.fecha;
+                    
+                    console.log("✅ Fecha cargada de Firebase:", savedDate);
+                    
+                    // Set the date in the input
+                    document.getElementById('targetDate').value = savedDate;
+                    
+                    // Auto-start countdown
+                    startCountdown();
+                } else {
+                    console.log("📭 No hay fecha guardada todavía");
+                }
+            } catch (error) {
+                console.error("❌ Error al cargar fecha:", error);
+            }
         }
+
+        // Load date when page loads
+        loadSavedDate();
 
         document.getElementById('startCountdown').addEventListener('click', startCountdown);
         document.getElementById('changeDate').addEventListener('click', changeDate);
@@ -481,15 +503,18 @@
             startBtn.textContent = '⏳ Guardando...';
 
             try {
-                // Save date to Firebase
+                // Use FIXED document ID (not auto-generated)
+                const docRef = doc(db, "fechaCynthia", "fechaActual");
+                
                 const dateData = {
                     fecha: dateInput,
                     fechaGuardada: new Date().toISOString(),
                     timestamp: serverTimestamp()
                 };
 
-                await addDoc(collection(db, "fechaCynthia"), dateData);
-                console.log("✅ Fecha guardada en Firebase");
+                // setDoc will CREATE or UPDATE the same document
+                await setDoc(docRef, dateData, { merge: true });
+                console.log("✅ Fecha guardada/actualizada en Firebase");
 
                 // Continue with countdown
                 targetDate = new Date(dateInput + 'T00:00:00').getTime();
@@ -503,7 +528,7 @@
 
             } catch (error) {
                 console.error("❌ Error al guardar fecha:", error);
-                alert('Hubo un error al guardar la fecha, pero el contador funcionará igual 💙');
+                alert('Hubo un error al guardar la fecha, pero el contador funcionará igual 💙\n\nError: ' + error.message);
                 
                 // Continue anyway
                 targetDate = new Date(dateInput + 'T00:00:00').getTime();
