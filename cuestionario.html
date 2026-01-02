@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cuestionario para Cynthia 💝</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF69B4;
+            --secondary: #FF1493;
+            --accent: #FFB6C1;
+            --dark: #2C3E50;
+            --light: #ECF0F1;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 10px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Floating hearts background */
+        .heart-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.3);
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header with romantic message */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .message {
+            font-size: 1.1rem;
+            color: var(--dark);
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+
+        .header .emoji {
+            font-size: 2rem;
+            margin: 10px 5px;
+        }
+
+        /* Form container */
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .category {
+            margin-bottom: 40px;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.1), rgba(255, 105, 180, 0.1));
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .question-text {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background: var(--accent);
+            transform: translateX(5px);
+            border-color: var(--primary);
+        }
+
+        .option input[type="radio"] {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .option input[type="checkbox"] {
+            margin-right: 12px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        /* Text inputs */
+        .text-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+        }
+
+        textarea.text-input {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Submit button */
+        .submit-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255, 20, 147, 0.4);
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(255, 20, 147, 0.6);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Success message */
+        .success-message {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .success-message h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .success-message p {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.4);
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 25px rgba(76, 175, 80, 0.6);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header .message {
+                font-size: 1rem;
+            }
+
+            .category-title {
+                font-size: 1.3rem;
+            }
+
+            .question-text {
+                font-size: 1rem;
+            }
+
+            .option label {
+                font-size: 0.95rem;
+            }
+
+            .submit-btn {
+                padding: 15px 35px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 5px;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.7rem;
+            }
+
+            .header .message {
+                font-size: 0.95rem;
+            }
+
+            .form-container {
+                padding: 20px 15px;
+            }
+
+            .question {
+                padding: 15px;
+            }
+
+            .category-title {
+                font-size: 1.2rem;
+            }
+
+            .question-text {
+                font-size: 0.95rem;
+            }
+
+            .option {
+                padding: 10px 12px;
+            }
+
+            .option label {
+                font-size: 0.9rem;
+            }
+
+            .submit-btn {
+                padding: 12px 30px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating hearts background -->
+    <div class="heart-bg" id="heartBg"></div>
+
+    <div class="container">
+        <!-- Header with romantic message -->
+        <div class="header">
+            <h1>Hola Cynthia 💝</h1>
+            <div class="emoji">🌸 💕 🌹</div>
+            <p class="message">
+                Me encantaría conocer más sobre tus gustos para poder sorprenderte con cosas que realmente te hagan feliz. 
+                <br><br>
+                Este cuestionario me ayudará a saber qué te gusta y qué no, para que cada detalle sea especial cuando nos veamos.
+                <br><br>
+                Tómate tu tiempo, responde con sinceridad, y si algo no te gusta o no aplica, ¡no hay problema! 
+                Solo quiero verte sonreír. 😊
+            </p>
+            <div class="emoji">✨ 💖 ✨</div>
+        </div>
+
+        <!-- Form -->
+        <form id="questionnaireForm" class="form-container">
+            <!-- CATEGORÍA: FLORES Y PLANTAS -->
+            <div class="category">
+                <h2 class="category-title">🌸 Flores y Plantas</h2>
+
+                <div class="question">
+                    <p class="question-text">1. ¿Cuál es tu tipo de flor favorita?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q1" value="Rosas" id="q1a"><label for="q1a">Rosas</label></div>
+                        <div class="option"><input type="radio" name="q1" value="Girasoles" id="q1b"><label for="q1b">Girasoles</label></div>
+                        <div class="option"><input type="radio" name="q1" value="Tulipanes" id="q1c"><label for="q1c">Tulipanes</label></div>
+                        <div class="option"><input type="radio" name="q1" value="Orquídeas" id="q1d"><label for="q1d">Orquídeas</label></div>
+                        <div class="option"><input type="radio" name="q1" value="Lirios" id="q1e"><label for="q1e">Lirios</label></div>
+                        <div class="option"><input type="radio" name="q1" value="No me gustan las flores" id="q1f"><label for="q1f">No me gusta</label></div>
+                        <input type="text" class="text-input" name="q1_other" placeholder="Otra (especifica)">
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">2. ¿Qué color de flores prefieres?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q2" value="Rojas" id="q2a"><label for="q2a">Rojas (clásico/pasión)</label></div>
+                        <div class="option"><input type="radio" name="q2" value="Rosas" id="q2b"><label for="q2b">Rosas (romántico/delicado)</label></div>
+                        <div class="option"><input type="radio" name="q2" value="Blancas" id="q2c"><label for="q2c">Blancas (puro/elegante)</label></div>
+                        <div class="option"><input type="radio" name="q2" value="Amarillas" id="q2d"><label for="q2d">Amarillas (alegría/amistad)</label></div>
+                        <div class="option"><input type="radio" name="q2" value="Moradas/Lilas" id="q2e"><label for="q2e">Moradas/Lilas (misterio/elegancia)</label></div>
+                        <div class="option"><input type="radio" name="q2" value="Mixtas" id="q2f"><label for="q2f">Mixtas/Varios colores</label></div>
+                        <div class="option"><input type="radio" name="q2" value="No me gusta" id="q2g"><label for="q2g">No me gusta</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">3. ¿Prefieres flores naturales o arreglos especiales?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q3" value="Ramo tradicional" id="q3a"><label for="q3a">Ramo tradicional de flores frescas</label></div>
+                        <div class="option"><input type="radio" name="q3" value="Arreglo elegante" id="q3b"><label for="q3b">Arreglo en florero/caja elegante</label></div>
+                        <div class="option"><input type="radio" name="q3" value="Flores individuales" id="q3c"><label for="q3c">Flores individuales con significado</label></div>
+                        <div class="option"><input type="radio" name="q3" value="Plantas en maceta" id="q3d"><label for="q3d">Plantas en maceta (duran más)</label></div>
+                        <div class="option"><input type="radio" name="q3" value="Flores preservadas" id="q3e"><label for="q3e">Flores preservadas/eternas</label></div>
+                        <div class="option"><input type="radio" name="q3" value="No me gusta" id="q3f"><label for="q3f">No me gusta</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">4. ¿Te gustan las plantas de interiores?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q4" value="Sí, me encantan" id="q4a"><label for="q4a">Sí, me encantan</label></div>
+                        <div class="option"><input type="radio" name="q4" value="Sí, fáciles de cuidar" id="q4b"><label for="q4b">Sí, pero fáciles de cuidar</label></div>
+                        <div class="option"><input type="radio" name="q4" value="No mucho" id="q4c"><label for="q4c">No mucho</label></div>
+                        <div class="option"><input type="radio" name="q4" value="No tengo espacio/tiempo" id="q4d"><label for="q4d">No tengo espacio/tiempo</label></div>
+                        <div class="option"><input type="radio" name="q4" value="No me gusta" id="q4e"><label for="q4e">No me gusta</label></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORÍA: CHOCOLATES Y DULCES -->
+            <div class="category">
+                <h2 class="category-title">🍫 Chocolates y Dulces</h2>
+
+                <div class="question">
+                    <p class="question-text">5. ¿Qué tipo de chocolate prefieres?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q5" value="Chocolate oscuro/amargo" id="q5a"><label for="q5a">Chocolate oscuro/amargo (70%+)</label></div>
+                        <div class="option"><input type="radio" name="q5" value="Chocolate con leche" id="q5b"><label for="q5b">Chocolate con leche (clásico)</label></div>
+                        <div class="option"><input type="radio" name="q5" value="Chocolate blanco" id="q5c"><label for="q5c">Chocolate blanco</label></div>
+                        <div class="option"><input type="radio" name="q5" value="Chocolate con relleno" id="q5d"><label for="q5d">Chocolate con relleno (caramelo, frutas)</label></div>
+                        <div class="option"><input type="radio" name="q5" value="No me gusta el chocolate" id="q5e"><label for="q5e">No me gusta el chocolate</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">6. ¿Marcas de chocolate que te gustan?</p>
+                    <div class="options">
+                        <div class="option"><input type="checkbox" name="q6" value="Ferrero Rocher" id="q6a"><label for="q6a">Ferrero Rocher</label></div>
+                        <div class="option"><input type="checkbox" name="q6" value="Lindt" id="q6b"><label for="q6b">Lindt</label></div>
+                        <div class="option"><input type="checkbox" name="q6" value="Godiva" id="q6c"><label for="q6c">Godiva</label></div>
+                        <div class="option"><input type="checkbox" name="q6" value="Hershey's" id="q6d"><label for="q6d">Hershey's</label></div>
+                        <div class="option"><input type="checkbox" name="q6" value="Artesanales" id="q6e"><label for="q6e">Chocolates artesanales/locales</label></div>
+                        <div class="option"><input type="checkbox" name="q6" value="No me gusta" id="q6f"><label for="q6f">No me gusta</label></div>
+                        <input type="text" class="text-input" name="q6_other" placeholder="Otra marca (especifica)">
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">7. ¿Te gustan los dulces además del chocolate?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q7" value="Sí, gomitas" id="q7a"><label for="q7a">Sí, gomitas</label></div>
+                        <div class="option"><input type="radio" name="q7" value="Sí, caramelos duros" id="q7b"><label for="q7b">Sí, caramelos duros</label></div>
+                        <div class="option"><input type="radio" name="q7" value="Sí, paletas" id="q7c"><label for="q7c">Sí, paletas/chupetas</label></div>
+                        <div class="option"><input type="radio" name="q7" value="Sí, dulces mexicanos" id="q7d"><label for="q7d">Sí, dulces típicos mexicanos</label></div>
+                        <div class="option"><input type="radio" name="q7" value="Prefiero solo chocolate" id="q7e"><label for="q7e">Prefiero solo chocolate</label></div>
+                        <div class="option"><input type="radio" name="q7" value="No soy dulcera" id="q7f"><label for="q7f">No soy muy dulcera</label></div>
+                        <div class="option"><input type="radio" name="q7" value="No me gusta" id="q7g"><label for="q7g">No me gusta</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">8. ¿Dulces mexicanos favoritos? (puedes elegir varios)</p>
+                    <div class="options">
+                        <div class="option"><input type="checkbox" name="q8" value="Mazapán" id="q8a"><label for="q8a">Mazapán</label></div>
+                        <div class="option"><input type="checkbox" name="q8" value="Obleas" id="q8b"><label for="q8b">Obleas</label></div>
+                        <div class="option"><input type="checkbox" name="q8" value="Palanqueta" id="q8c"><label for="q8c">Palanqueta</label></div>
+                        <div class="option"><input type="checkbox" name="q8" value="Cocadas" id="q8d"><label for="q8d">Cocadas</label></div>
+                        <div class="option"><input type="checkbox" name="q8" value="Dulces de tamarindo" id="q8e"><label for="q8e">Dulces de tamarindo (pulparindo, etc.)</label></div>
+                        <div class="option"><input type="checkbox" name="q8" value="Glorias" id="q8f"><label for="q8f">Glorias</label></div>
+                        <div class="option"><input type="checkbox" name="q8" value="Alegrías" id="q8g"><label for="q8g">Alegrías</label></div>
+                        <div class="option"><input type="checkbox" name="q8" value="No me gusta" id="q8h"><label for="q8h">No me gusta</label></div>
+                        <input type="text" class="text-input" name="q8_other" placeholder="Otro (especifica)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORÍA: BEBIDAS Y CAFÉ -->
+            <div class="category">
+                <h2 class="category-title">☕ Bebidas y Café</h2>
+
+                <div class="question">
+                    <p class="question-text">9. ¿Cómo te gusta el café?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q9" value="Negro/Americano" id="q9a"><label for="q9a">Negro/Americano</label></div>
+                        <div class="option"><input type="radio" name="q9" value="Con leche" id="q9b"><label for="q9b">Con leche (latte, cappuccino)</label></div>
+                        <div class="option"><input type="radio" name="q9" value="Frappé/Frío" id="q9c"><label for="q9c">Frappé/Frío</label></div>
+                        <div class="option"><input type="radio" name="q9" value="Dulce" id="q9d"><label for="q9d">Dulce (mocca, caramelo)</label></div>
+                        <div class="option"><input type="radio" name="q9" value="No tomo café" id="q9e"><label for="q9e">No tomo café</label></div>
+                        <div class="option"><input type="radio" name="q9" value="Prefiero té" id="q9f"><label for="q9f">Prefiero té</label></div>
+                        <div class="option"><input type="radio" name="q9" value="No me gusta" id="q9g"><label for="q9g">No me gusta</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">10. ¿Cafetería favorita?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q10" value="Starbucks" id="q10a"><label for="q10a">Starbucks</label></div>
+                        <div class="option"><input type="radio" name="q10" value="Café local" id="q10b"><label for="q10b">Café local/independiente</label></div>
+                        <div class="option"><input type="radio" name="q10" value="Italian Coffee" id="q10c"><label for="q10c">Italian Coffee</label></div>
+                        <div class="option"><input type="radio" name="q10" value="En casa" id="q10d"><label for="q10d">Prefiero hacerlo en casa</label></div>
+                        <div class="option"><input type="radio" name="q10" value="No me gusta" id="q10e"><label for="q10e">No me gusta</label></div>
+                        <input type="text" class="text-input" name="q10_other" placeholder="Otra (especifica)">
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">11. ¿Bebida favorita (además de café)?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q11" value="Té" id="q11a"><label for="q11a">Té (caliente o frío)</label></div>
+                        <div class="option"><input type="radio" name="q11" value="Smoothies/Jugos" id="q11b"><label for="q11b">Smoothies/Jugos naturales</label></div>
+                        <div class="option"><input type="radio" name="q11" value="Refrescos" id="q11c"><label for="q11c">Refrescos</label></div>
+                        <div class="option"><input type="radio" name="q11" value="Agua de sabor" id="q11d"><label for="q11d">Agua de sabor</label></div>
+                        <div class="option"><input type="radio" name="q11" value="Bebidas energéticas" id="q11e"><label for="q11e">Bebidas energéticas</label></div>
+                        <div class="option"><input type="radio" name="q11" value="No me gusta" id="q11f"><label for="q11f">No me gusta</label></div>
+                        <input type="text" class="text-input" name="q11_other" placeholder="Otra (especifica)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORÍA: POSTRES Y PASTELERÍA -->
+            <div class="category">
+                <h2 class="category-title">🍰 Postres y Pastelería</h2>
+
+                <div class="question">
+                    <p class="question-text">12. ¿Cuál es tu postre favorito?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q12" value="Pastel/Tarta" id="q12a"><label for="q12a">Pastel/Tarta</label></div>
+                        <div class="option"><input type="radio" name="q12" value="Helado" id="q12b"><label for="q12b">Helado</label></div>
+                        <div class="option"><input type="radio" name="q12" value="Pay/Pie" id="q12c"><label for="q12c">Pay/Pie</label></div>
+                        <div class="option"><input type="radio" name="q12" value="Galletas" id="q12d"><label for="q12d">Galletas</label></div>
+                        <div class="option"><input type="radio" name="q12" value="Brownies" id="q12e"><label for="q12e">Brownies</label></div>
+                        <div class="option"><input type="radio" name="q12" value="Churros" id="q12f"><label for="q12f">Churros</label></div>
+                        <div class="option"><input type="radio" name="q12" value="Flan/Gelatina" id="q12g"><label for="q12g">Flan/Gelatina</label></div>
+                        <div class="option"><input type="radio" name="q12" value="No me gusta" id="q12h"><label for="q12h">No me gusta</label></div>
+                        <input type="text" class="text-input" name="q12_other" placeholder="Otro (especifica)">
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">13. ¿Sabor de pastel preferido?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q13" value="Chocolate" id="q13a"><label for="q13a">Chocolate</label></div>
+                        <div class="option"><input type="radio" name="q13" value="Vainilla" id="q13b"><label for="q13b">Vainilla</label></div>
+                        <div class="option"><input type="radio" name="q13" value="Red Velvet" id="q13c"><label for="q13c">Red Velvet</label></div>
+                        <div class="option"><input type="radio" name="q13" value="Tres leches" id="q13d"><label for="q13d">Tres leches</label></div>
+                        <div class="option"><input type="radio" name="q13" value="Frutos rojos" id="q13e"><label for="q13e">Frutos rojos</label></div>
+                        <div class="option"><input type="radio" name="q13" value="Limón" id="q13f"><label for="q13f">Limón</label></div>
+                        <div class="option"><input type="radio" name="q13" value="No me gusta" id="q13g"><label for="q13g">No me gusta</label></div>
+                        <input type="text" class="text-input" name="q13_other" placeholder="Otro (especifica)">
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">14. ¿Helado favorito?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q14" value="Chocolate" id="q14a"><label for="q14a">Chocolate</label></div>
+                        <div class="option"><input type="radio" name="q14" value="Vainilla" id="q14b"><label for="q14b">Vainilla</label></div>
+                        <div class="option"><input type="radio" name="q14" value="Fresa" id="q14c"><label for="q14c">Fresa</label></div>
+                        <div class="option"><input type="radio" name="q14" value="Cookies & Cream" id="q14d"><label for="q14d">Cookies & Cream</label></div>
+                        <div class="option"><input type="radio" name="q14" value="Napolitano" id="q14e"><label for="q14e">Napolitano</label></div>
+                        <div class="option"><input type="radio" name="q14" value="Sabores frutales" id="q14f"><label for="q14f">Sabores frutales</label></div>
+                        <div class="option"><input type="radio" name="q14" value="No me gusta" id="q14g"><label for="q14g">No me gusta</label></div>
+                        <input type="text" class="text-input" name="q14_other" placeholder="Otro (especifica)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORÍA: COMIDA FAVORITA -->
+            <div class="category">
+                <h2 class="category-title">🍕 Comida Favorita</h2>
+
+                <div class="question">
+                    <p class="question-text">15. ¿Tipo de comida que más te gusta?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q15" value="Mexicana" id="q15a"><label for="q15a">Mexicana</label></div>
+                        <div class="option"><input type="radio" name="q15" value="Italiana" id="q15b"><label for="q15b">Italiana</label></div>
+                        <div class="option"><input type="radio" name="q15" value="China" id="q15c"><label for="q15c">China</label></div>
+                        <div class="option"><input type="radio" name="q15" value="Japonesa" id="q15d"><label for="q15d">Japonesa</label></div>
+                        <div class="option"><input type="radio" name="q15" value="Comida rápida" id="q15e"><label for="q15e">Comida rápida/Hamburguesas</label></div>
+                        <div class="option"><input type="radio" name="q15" value="Mariscos" id="q15f"><label for="q15f">Mariscos</label></div>
+                        <div class="option"><input type="radio" name="q15" value="No me gusta" id="q15g"><label for="q15g">No me gusta</label></div>
+                        <input type="text" class="text-input" name="q15_other" placeholder="Otra (especifica)">
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">16. ¿Platillo mexicano favorito?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q16" value="Tacos" id="q16a"><label for="q16a">Tacos</label></div>
+                        <div class="option"><input type="radio" name="q16" value="Enchiladas" id="q16b"><label for="q16b">Enchiladas</label></div>
+                        <div class="option"><input type="radio" name="q16" value="Pozole" id="q16c"><label for="q16c">Pozole</label></div>
+                        <div class="option"><input type="radio" name="q16" value="Tamales" id="q16d"><label for="q16d">Tamales</label></div>
+                        <div class="option"><input type="radio" name="q16" value="Quesadillas" id="q16e"><label for="q16e">Quesadillas</label></div>
+                        <div class="option"><input type="radio" name="q16" value="Mole" id="q16f"><label for="q16f">Mole</label></div>
+                        <div class="option"><input type="radio" name="q16" value="No me gusta" id="q16g"><label for="q16g">No me gusta</label></div>
+                        <input type="text" class="text-input" name="q16_other" placeholder="Otro (especifica)">
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">17. ¿Pizza favorita?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q17" value="Pepperoni" id="q17a"><label for="q17a">Pepperoni</label></div>
+                        <div class="option"><input type="radio" name="q17" value="Hawaiana" id="q17b"><label for="q17b">Hawaiana</label></div>
+                        <div class="option"><input type="radio" name="q17" value="Vegetariana" id="q17c"><label for="q17c">Vegetariana</label></div>
+                        <div class="option"><input type="radio" name="q17" value="Cuatro quesos" id="q17d"><label for="q17d">Cuatro quesos</label></div>
+                        <div class="option"><input type="radio" name="q17" value="Carnes frías" id="q17e"><label for="q17e">Carnes frías</label></div>
+                        <div class="option"><input type="radio" name="q17" value="No me gusta la pizza" id="q17f"><label for="q17f">No me gusta la pizza</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">18. ¿Snacks/Botanas favoritas?</p>
+                    <div class="options">
+                        <div class="option"><input type="checkbox" name="q18" value="Papas fritas" id="q18a"><label for="q18a">Papas fritas</label></div>
+                        <div class="option"><input type="checkbox" name="q18" value="Palomitas" id="q18b"><label for="q18b">Palomitas</label></div>
+                        <div class="option"><input type="checkbox" name="q18" value="Nachos" id="q18c"><label for="q18c">Nachos</label></div>
+                        <div class="option"><input type="checkbox" name="q18" value="Frutos secos" id="q18d"><label for="q18d">Frutos secos</label></div>
+                        <div class="option"><input type="checkbox" name="q18" value="Chocolate/Dulces" id="q18e"><label for="q18e">Chocolate/Dulces</label></div>
+                        <div class="option"><input type="checkbox" name="q18" value="No me gusta" id="q18f"><label for="q18f">No me gusta</label></div>
+                        <input type="text" class="text-input" name="q18_other" placeholder="Otra (especifica)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATEGORÍA: REGALOS Y DETALLES -->
+            <div class="category">
+                <h2 class="category-title">🎁 Regalos y Detalles</h2>
+
+                <div class="question">
+                    <p class="question-text">19. ¿Qué tipo de regalo te emociona más?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q19" value="Flores y chocolates" id="q19a"><label for="q19a">Flores y chocolates (clásico)</label></div>
+                        <div class="option"><input type="radio" name="q19" value="Peluches/Muñecos" id="q19b"><label for="q19b">Peluches/Muñecos</label></div>
+                        <div class="option"><input type="radio" name="q19" value="Joyería/Accesorios" id="q19c"><label for="q19c">Joyería/Accesorios</label></div>
+                        <div class="option"><input type="radio" name="q19" value="Experiencias" id="q19d"><label for="q19d">Experiencias (cena, cine, paseo)</label></div>
+                        <div class="option"><input type="radio" name="q19" value="Detalles personalizados" id="q19e"><label for="q19e">Detalles hechos a mano/personalizados</label></div>
+                        <div class="option"><input type="radio" name="q19" value="Libros/Arte" id="q19f"><label for="q19f">Libros/Arte</label></div>
+                        <div class="option"><input type="radio" name="q19" value="Tecnología/Gadgets" id="q19g"><label for="q19g">Tecnología/Gadgets</label></div>
+                        <div class="option"><input type="radio" name="q19" value="No me gusta" id="q19h"><label for="q19h">No me gusta</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">20. ¿Te gustan los peluches?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q20" value="Sí, me encantan" id="q20a"><label for="q20a">Sí, me encantan</label></div>
+                        <div class="option"><input type="radio" name="q20" value="Sí, pequeños/medianos" id="q20b"><label for="q20b">Sí, pero pequeños/medianos</label></div>
+                        <div class="option"><input type="radio" name="q20" value="Solo de personajes" id="q20c"><label for="q20c">Solo de personajes específicos</label></div>
+                        <div class="option"><input type="radio" name="q20" value="No mucho" id="q20d"><label for="q20d">No mucho</label></div>
+                        <div class="option"><input type="radio" name="q20" value="No me gusta" id="q20e"><label for="q20e">No me gusta</label></div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">21. Si te regalan un peluche, ¿de qué prefieres?</p>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q21" value="Oso de peluche" id="q21a"><label for="q21a">Oso de peluche clásico</label></div>
+                        <div class="option"><input type="radio" name="q21" value="Animales" id="q21b"><label for="q21b">Animales (gato, perro, etc.)</label></div>
+                        <div class="option"><input type="radio" name="q21" value="Personajes" id="q21c"><label for="q21c">Personajes (Disney, anime, videojuegos)</label></div>
+                        <div class="option"><input type="radio" name="q21" value="Unicornios" id="q21d"><label for="q21d">Unicornios/Criaturas fantásticas</label></div>
+                        <div class="option"><input type="radio" name="q21" value="No me gusta" id="q21e"><label for="q21e">No me gusta</label></div>
+                        <input type="text" class="text-input" name="q21_other" placeholder="Otro (especifica)">
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">22. ¿Colores favoritos? (puedes elegir varios)</p>
+                    <div class="options">
+                        <div class="option"><input type="checkbox" name="q22" value="Rosa" id="q22a"><label for="q22a">Rosa</label></div>
+                        <div class="option"><input type="checkbox" name="q22" value="Azul" id="q22b"><label for="q22b">Azul</label></div>
+                        <div class="option"><input type="checkbox" name="q22" value="Morado/Lila" id="q22c"><label for="q22c">Morado/Lila</label></div>
+                        <div class="option"><input type="checkbox" name="q22" value="Rojo" id="q22d"><label for="q22d">Rojo</label></div>
+                        <div class="option"><input type="checkbox" name="q22" value="Negro" id="q22e"><label for="q22e">Negro</label></div>
+                        <div class="option"><input type="checkbox" name="q22" value="Blanco" id="q22f"><label for="q22f">Blanco</label></div>
+                        <input type="text" class="text-input" name="q22_other" placeholder="Otro (especifica)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- PREGUNTAS ESPECIALES/ABIERTAS -->
+            <div class="category">
+                <h2 class="category-title">🌟 Preguntas Especiales</h2>
+
+                <div class="question">
+                    <p class="question-text">23. Si pudieras pedir cualquier cosa para una cita perfecta, ¿qué sería?</p>
+                    <textarea class="text-input" name="q23" rows="4" placeholder="Cuéntame con detalle..."></textarea>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">24. ¿Algo que NO te guste recibir como regalo?</p>
+                    <textarea class="text-input" name="q24" rows="4" placeholder="Es importante que lo sepa para evitarlo..."></textarea>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">25. ¿Tienes alguna alergia o alimento que no puedas comer? ⚠️ IMPORTANTE</p>
+                    <textarea class="text-input" name="q25" rows="4" placeholder="Por favor menciona cualquier alergia o restricción alimenticia..."></textarea>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">26. ¿Algo más que te gustaría que supiera sobre tus gustos?</p>
+                    <textarea class="text-input" name="q26" rows="4" placeholder="Cualquier cosa adicional que quieras compartir..."></textarea>
+                </div>
+            </div>
+
+            <!-- Submit button -->
+            <div class="submit-container">
+                <button type="submit" class="submit-btn">💝 Enviar Respuestas 💝</button>
+            </div>
+        </form>
+
+        <!-- Success message -->
+        <div class="success-message" id="successMessage">
+            <h2>¡Muchas gracias, Cynthia! 💕</h2>
+            <p>Tus respuestas han sido guardadas. Ahora sé exactamente cómo hacerte sonreír cuando nos veamos.</p>
+            <p>¡Descarga tu archivo de respuestas aquí! 👇</p>
+            <button class="download-btn" onclick="downloadAnswers()">📥 Descargar Respuestas (TXT)</button>
+            <button class="download-btn" onclick="copyToClipboard()">📋 Copiar al Portapapeles</button>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmefX4EdrExy-LFM-5G0Bx8-RfIBHFjos",
+            authDomain: "billar-204e7.firebaseapp.com",
+            projectId: "billar-204e7",
+            storageBucket: "billar-204e7.firebasestorage.app",
+            messagingSenderId: "953693612662",
+            appId: "1:953693612662:web:cd2e0b32c64417f61b4d57",
+            measurementId: "G-KJJR1QTYM7"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        // Create floating hearts
+        function createHearts() {
+            const heartBg = document.getElementById('heartBg');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = '💖';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 15 + 's';
+                heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                heartBg.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        // Form submission
+        const form = document.getElementById('questionnaireForm');
+        let answersText = '';
+        let answersObject = {};
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Disable submit button to prevent double submission
+            const submitBtn = form.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ Guardando...';
+
+            // Collect all answers as object for Firebase
+            answersObject = {
+                fechaRespuesta: new Date().toISOString(),
+                timestamp: serverTimestamp()
+            };
+
+            // Also create text version for download
+            answersText = '='.repeat(60) + '\n';
+            answersText += 'CUESTIONARIO DE GUSTOS - CYNTHIA 💝\n';
+            answersText += 'Fecha: ' + new Date().toLocaleString('es-MX') + '\n';
+            answersText += '='.repeat(60) + '\n\n';
+
+            const formData = new FormData(form);
+            let currentCategory = '';
+
+            // Process each question
+            for (let i = 1; i <= 26; i++) {
+                const questionElement = form.querySelector(`[name="q${i}"]`)?.closest('.question');
+                if (!questionElement) continue;
+
+                const questionText = questionElement.querySelector('.question-text').textContent;
+                
+                // Detect category changes
+                const category = questionElement.closest('.category')?.querySelector('.category-title')?.textContent;
+                if (category && category !== currentCategory) {
+                    currentCategory = category;
+                    answersText += '\n' + '-'.repeat(60) + '\n';
+                    answersText += currentCategory + '\n';
+                    answersText += '-'.repeat(60) + '\n\n';
+                }
+
+                answersText += questionText + '\n';
+
+                // Get answer(s)
+                const inputs = form.querySelectorAll(`[name="q${i}"]`);
+                let answers = [];
+                
+                inputs.forEach(input => {
+                    if (input.type === 'radio' && input.checked) {
+                        answers.push(input.value);
+                    } else if (input.type === 'checkbox' && input.checked) {
+                        answers.push(input.value);
+                    } else if (input.type === 'text' && input.value.trim() !== '') {
+                        answers.push('Otro: ' + input.value);
+                    } else if (input.tagName === 'TEXTAREA' && input.value.trim() !== '') {
+                        answers.push(input.value);
+                    }
+                });
+
+                // Check for "other" text inputs
+                const otherInput = form.querySelector(`[name="q${i}_other"]`);
+                if (otherInput && otherInput.value.trim() !== '') {
+                    answers.push('Otro: ' + otherInput.value);
+                }
+
+                // Save to object for Firebase
+                answersObject[`pregunta${i}`] = {
+                    pregunta: questionText,
+                    respuesta: answers.length > 0 ? answers : ['No respondida'],
+                    categoria: category || 'Sin categoría'
+                };
+
+                // Save to text
+                if (answers.length > 0) {
+                    answersText += 'Respuesta: ' + answers.join(', ') + '\n';
+                } else {
+                    answersText += 'Respuesta: (No respondida)\n';
+                }
+                answersText += '\n';
+            }
+
+            answersText += '='.repeat(60) + '\n';
+            answersText += 'FIN DEL CUESTIONARIO 💕\n';
+            answersText += '='.repeat(60) + '\n';
+
+            // Save text version to localStorage as backup
+            localStorage.setItem('cynthia_answers', answersText);
+            localStorage.setItem('cynthia_answers_object', JSON.stringify(answersObject));
+
+            try {
+                // Save to Firebase Firestore
+                const docRef = await addDoc(collection(db, "cynthiaEncuesta"), answersObject);
+                console.log("✅ Documento guardado con ID:", docRef.id);
+
+                // Show success message
+                form.style.display = 'none';
+                document.getElementById('successMessage').classList.add('show');
+
+                // Update success message to show Firebase saved
+                const successMsg = document.querySelector('.success-message p');
+                successMsg.innerHTML = `Tus respuestas han sido guardadas exitosamente en la base de datos. 🎉<br><br>También puedes descargar una copia para ti:`;
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            } catch (error) {
+                console.error("❌ Error al guardar en Firebase:", error);
+                
+                // Show error but still allow download
+                submitBtn.disabled = false;
+                submitBtn.textContent = '💝 Reintentar Envío 💝';
+                
+                alert('❌ Hubo un error al guardar las respuestas en línea.\n\nPero no te preocupes, puedes descargar tus respuestas y enviármelas manualmente.\n\nError: ' + error.message);
+                
+                // Still show success section so they can download
+                form.style.display = 'none';
+                document.getElementById('successMessage').classList.add('show');
+                
+                const successMsg = document.querySelector('.success-message p');
+                successMsg.innerHTML = `⚠️ No se pudieron guardar automáticamente, pero puedes descargar tus respuestas y enviármelas:`;
+            }
+        });
+
+        // Download answers as TXT
+        window.downloadAnswers = function() {
+            const text = localStorage.getItem('cynthia_answers') || answersText;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Respuestas_Cynthia_' + new Date().toISOString().split('T')[0] + '.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Copy to clipboard
+        window.copyToClipboard = function() {
+            const text = localStorage.getItem('cynthia_answers') || answersText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('¡Respuestas copiadas al portapapeles! 📋');
+            }).catch(() => {
+                alert('No se pudo copiar. Por favor usa el botón de descargar.');
+            });
+        }
+
+        // Prevent accidental page reload
+        window.addEventListener('beforeunload', function(e) {
+            const formVisible = form.style.display !== 'none';
+            if (formVisible) {
+                const formData = new FormData(form);
+                let hasData = false;
+                for (let pair of formData.entries()) {
+                    if (pair[1]) {
+                        hasData = true;
+                        break;
+                    }
+                }
+                if (hasData) {
+                    e.preventDefault();
+                    e.returnValue = '';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
