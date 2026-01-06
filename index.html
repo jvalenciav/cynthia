@@ -132,6 +132,14 @@
             }
         }
 
+        /* Initial buttons container */
+        .initial-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
         /* Message Container */
         .message-container {
             display: none;
@@ -224,8 +232,10 @@
             border-radius: 10px;
             box-shadow: 0 5px 30px rgba(30, 136, 229, 0.6);
             transition: all 0.3s ease;
-            flex: 1;
-            min-width: 200px;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .continue-btn:hover {
@@ -235,15 +245,6 @@
 
         .continue-btn.show {
             display: block;
-            animation: slideUp 0.8s ease;
-        }
-
-        .buttons-container {
-            display: none;
-        }
-
-        .buttons-container.show {
-            display: flex;
             animation: slideUp 0.8s ease;
         }
 
@@ -291,6 +292,13 @@
             .start-button {
                 padding: 18px 35px;
                 font-size: 1.2rem;
+                width: 100%;
+            }
+
+            .initial-buttons {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
             }
 
             .message-container {
@@ -319,12 +327,6 @@
             .continue-btn {
                 font-size: 1.1rem;
                 padding: 15px 35px;
-                min-width: 100%;
-            }
-
-            .buttons-container {
-                flex-direction: column;
-                gap: 12px !important;
             }
         }
 
@@ -393,8 +395,13 @@
 </head>
 <body>
     <div class="container">
-        <!-- Initial Button -->
-        <button class="start-button" id="startBtn">Ven... vamos...</button>
+        <!-- Initial Buttons -->
+        <div class="initial-buttons">
+            <button class="start-button" id="startBtn">Ven... vamos...</button>
+            <button class="start-button" onclick="window.location.href='poemas.html'" style="background: linear-gradient(135deg, #FF69B4, #C71585); box-shadow: 0 10px 40px rgba(199, 21, 133, 0.6);">
+                Tus Poemas 📝
+            </button>
+        </div>
 
         <!-- Message Container -->
         <div class="message-container" id="messageContainer">
@@ -404,14 +411,9 @@
                 <p id="signatureText"></p>
                 <p class="signature-name" id="signatureName"></p>
             </div>
-            <div class="buttons-container" id="buttonsContainer" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 30px;">
-                <button class="continue-btn" onclick="window.location.href='quiz.html'">
-                    CONTINUAR 💙
-                </button>
-                <button class="continue-btn" onclick="window.location.href='poemas.html'" style="background: linear-gradient(135deg, #FF69B4, #C71585); box-shadow: 0 5px 30px rgba(199, 21, 133, 0.6);">
-                    TUS POEMAS 📝
-                </button>
-            </div>
+            <button class="continue-btn" id="continueBtn" onclick="window.location.href='quiz.html'" style="display: none; margin-top: 40px;">
+                CONTINUAR 💙
+            </button>
         </div>
     </div>
 
@@ -422,7 +424,7 @@
         const messageTextElement = document.getElementById('messageText');
         const signatureTextElement = document.getElementById('signatureText');
         const signatureNameElement = document.getElementById('signatureName');
-        const buttonsContainer = document.getElementById('buttonsContainer');
+        const continueBtn = document.getElementById('continueBtn');
 
         const greeting = "Hola Preciosa...";
         
@@ -439,10 +441,10 @@
         let typingSpeed = 50; // milliseconds per character
 
         startBtn.addEventListener('click', function() {
-            startBtn.classList.add('fade-out');
+            startBtn.parentElement.classList.add('fade-out');
             
             setTimeout(() => {
-                startBtn.style.display = 'none';
+                startBtn.parentElement.style.display = 'none';
                 messageContainer.classList.add('active');
                 
                 setTimeout(() => {
@@ -482,7 +484,8 @@
                 setTimeout(() => {
                     typeText(signatureNameElement, signatureName, 0, () => {
                         setTimeout(() => {
-                            buttonsContainer.classList.add('show');
+                            continueBtn.style.display = 'block';
+                            continueBtn.classList.add('show');
                         }, 500);
                     });
                 }, 500);
