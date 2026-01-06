@@ -210,7 +210,7 @@
         /* Continue Button */
         .continue-btn {
             display: none;
-            margin-top: 40px;
+            margin-top: 0;
             background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
             color: white;
             border: none;
@@ -224,7 +224,8 @@
             border-radius: 10px;
             box-shadow: 0 5px 30px rgba(30, 136, 229, 0.6);
             transition: all 0.3s ease;
-            width: 100%;
+            flex: 1;
+            min-width: 200px;
         }
 
         .continue-btn:hover {
@@ -234,6 +235,15 @@
 
         .continue-btn.show {
             display: block;
+            animation: slideUp 0.8s ease;
+        }
+
+        .buttons-container {
+            display: none;
+        }
+
+        .buttons-container.show {
+            display: flex;
             animation: slideUp 0.8s ease;
         }
 
@@ -309,6 +319,12 @@
             .continue-btn {
                 font-size: 1.1rem;
                 padding: 15px 35px;
+                min-width: 100%;
+            }
+
+            .buttons-container {
+                flex-direction: column;
+                gap: 12px !important;
             }
         }
 
@@ -378,7 +394,7 @@
 <body>
     <div class="container">
         <!-- Initial Button -->
-        <button class="start-button" id="startBtn">Ven vamos....</button>
+        <button class="start-button" id="startBtn">Ven... vamos...</button>
 
         <!-- Message Container -->
         <div class="message-container" id="messageContainer">
@@ -388,9 +404,14 @@
                 <p id="signatureText"></p>
                 <p class="signature-name" id="signatureName"></p>
             </div>
-            <button class="continue-btn" id="continueBtn" onclick="window.location.href='quiz.html'">
-                CONTINUAR 💙
-            </button>
+            <div class="buttons-container" id="buttonsContainer" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 30px;">
+                <button class="continue-btn" onclick="window.location.href='quiz.html'">
+                    CONTINUAR 💙
+                </button>
+                <button class="continue-btn" onclick="window.location.href='poemas.html'" style="background: linear-gradient(135deg, #FF69B4, #C71585); box-shadow: 0 5px 30px rgba(199, 21, 133, 0.6);">
+                    TUS POEMAS 📝
+                </button>
+            </div>
         </div>
     </div>
 
@@ -401,7 +422,7 @@
         const messageTextElement = document.getElementById('messageText');
         const signatureTextElement = document.getElementById('signatureText');
         const signatureNameElement = document.getElementById('signatureName');
-        const continueBtn = document.getElementById('continueBtn');
+        const buttonsContainer = document.getElementById('buttonsContainer');
 
         const greeting = "Hola Preciosa...";
         
@@ -461,7 +482,7 @@
                 setTimeout(() => {
                     typeText(signatureNameElement, signatureName, 0, () => {
                         setTimeout(() => {
-                            continueBtn.classList.add('show');
+                            buttonsContainer.classList.add('show');
                         }, 500);
                     });
                 }, 500);
