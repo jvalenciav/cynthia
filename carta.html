@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para ti, Cynthia</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e92b8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Pantalla de bienvenida */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f2557 0%, #1e3c72 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeOut 1s ease-in-out 3s forwards;
+        }
+
+        .welcome-screen h1 {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInText 1s ease-in-out 0.5s forwards;
+        }
+
+        .welcome-screen p {
+            font-size: 1.2rem;
+            opacity: 0;
+            font-style: italic;
+            animation: fadeInText 1s ease-in-out 1.5s forwards;
+        }
+
+        @keyframes fadeInText {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* Sección de carta principal */
+        .letter-section {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 50px 40px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            animation: slideUp 1s ease-out 4s forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .letter-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .letter-header h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .letter-header .date {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .letter-content {
+            line-height: 2;
+            font-size: 1.1rem;
+        }
+
+        .letter-content p {
+            margin-bottom: 25px;
+            opacity: 0;
+        }
+
+        /* Animación de escritura para cada párrafo */
+        .letter-content p:nth-child(1) { animation: typeIn 1s ease-out 4.5s forwards; }
+        .letter-content p:nth-child(2) { animation: typeIn 1s ease-out 5.5s forwards; }
+        .letter-content p:nth-child(3) { animation: typeIn 1s ease-out 6.5s forwards; }
+        .letter-content p:nth-child(4) { animation: typeIn 1s ease-out 7.5s forwards; }
+
+        @keyframes typeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+            font-style: italic;
+            opacity: 0;
+            animation: typeIn 1s ease-out 8.5s forwards;
+        }
+
+        /* Separador con corazón */
+        .divider {
+            text-align: center;
+            margin: 60px 0;
+            opacity: 0;
+            animation: fadeInText 1s ease-out 9s forwards;
+        }
+
+        .divider-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .divider-line::before,
+        .divider-line::after {
+            content: '';
+            width: 100px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .heart {
+            font-size: 1.5rem;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Título de razones */
+        .reasons-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInText 1s ease-out 9.5s forwards;
+        }
+
+        /* Tarjetas de razones */
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .reason-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .reason-card:nth-child(1) { animation: cardAppear 0.6s ease-out 10s forwards; }
+        .reason-card:nth-child(2) { animation: cardAppear 0.6s ease-out 10.3s forwards; }
+        .reason-card:nth-child(3) { animation: cardAppear 0.6s ease-out 10.6s forwards; }
+        .reason-card:nth-child(4) { animation: cardAppear 0.6s ease-out 10.9s forwards; }
+        .reason-card:nth-child(5) { animation: cardAppear 0.6s ease-out 11.2s forwards; }
+        .reason-card:nth-child(6) { animation: cardAppear 0.6s ease-out 11.5s forwards; }
+        .reason-card:nth-child(7) { animation: cardAppear 0.6s ease-out 11.8s forwards; }
+        .reason-card:nth-child(8) { animation: cardAppear 0.6s ease-out 12.1s forwards; }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reason-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .reason-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .reason-title {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .reason-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            text-align: center;
+        }
+
+        /* Mensaje final */
+        .final-message {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            animation: slideUp 1s ease-out 12.5s forwards;
+        }
+
+        .final-message h3 {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .final-message p {
+            font-size: 1.2rem;
+            line-height: 2;
+            font-style: italic;
+        }
+
+        /* Estrellas de fondo */
+        .star {
+            position: fixed;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .letter-section {
+                padding: 35px 25px;
+            }
+
+            .letter-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .letter-content {
+                font-size: 1rem;
+            }
+
+            .reasons-title {
+                font-size: 1.6rem;
+            }
+
+            .reasons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-screen h1 {
+                font-size: 2rem;
+            }
+
+            .welcome-screen p {
+                font-size: 1rem;
+            }
+
+            .letter-section {
+                padding: 30px 20px;
+            }
+
+            .letter-header h2 {
+                font-size: 1.4rem;
+                letter-spacing: 2px;
+            }
+
+            .letter-content {
+                font-size: 0.95rem;
+                line-height: 1.8;
+            }
+
+            .reason-card {
+                padding: 25px 20px;
+            }
+
+            .reason-icon {
+                font-size: 2rem;
+            }
+
+            .reason-title {
+                font-size: 1.1rem;
+            }
+
+            .reason-text {
+                font-size: 0.9rem;
+            }
+
+            .final-message {
+                padding: 35px 25px;
+            }
+
+            .final-message h3 {
+                font-size: 1.5rem;
+            }
+
+            .final-message p {
+                font-size: 1rem;
+            }
+
+            .divider-line::before,
+            .divider-line::after {
+                width: 50px;
+            }
+        }
+
+        /* Skip button para usuarios impacientes */
+        .skip-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .skip-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .skip-animations {
+            animation: none !important;
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Estrellas de fondo -->
+    <script>
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.width = Math.random() * 3 + 1 + 'px';
+            star.style.height = star.style.width;
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            document.body.appendChild(star);
+        }
+    </script>
+
+    <!-- Pantalla de bienvenida -->
+    <div class="welcome-screen">
+        <h1>Para ti, Cynthia</h1>
+        <p>Con aprecio y cariño ✨</p>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <!-- Carta principal -->
+        <div class="letter-section">
+            <div class="letter-header">
+                <h2>Cynthia</h2>
+                <div class="date">Hoy, 11 de enero de 2026</div>
+            </div>
+            <div class="letter-content">
+                <p>Hay personas que llegan y simplemente cambian la forma en la que ves las cosas. Tú eres una de esas personas.</p>
+
+                <p>No sé exactamente en qué momento pasó, pero poco a poco fuiste convirtiéndote en alguien importante para mí. Alguien con quien quiero compartir lo bueno, lo malo, lo absurdo... alguien cuya presencia hace que todo tenga más sentido.</p>
+
+                <p>Eres constante cuando el mundo es caos. Eres luz cuando todo se oscurece. Y aunque a veces las palabras se quedan cortas, quiero que sepas que tu existencia en mi vida no es casualidad... es de las cosas más valiosas que tengo.</p>
+
+                <p>Gracias por ser tú. Por estar. Por existir así, exactamente como eres.</p>
+            </div>
+            <div class="signature">— Siempre, tu búho observador 🦉💙</div>
+        </div>
+
+        <!-- Separador -->
+        <div class="divider">
+            <div class="divider-line">
+                <span class="heart">💙</span>
+            </div>
+        </div>
+
+        <!-- Título de razones -->
+        <h2 class="reasons-title">Por qué te aprecio tanto</h2>
+
+        <!-- Tarjetas de razones -->
+        <div class="reasons-grid">
+            <div class="reason-card">
+                <div class="reason-icon">🐋</div>
+                <div class="reason-title">Tu libertad</div>
+                <div class="reason-text">Eres como una ballena en el océano: libre, profunda, llena de paz. Me encanta esa tranquilidad que llevas dentro.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-icon">👀</div>
+                <div class="reason-title">Cómo observas</div>
+                <div class="reason-text">Ves cosas que otros no ven. Detalles mínimos, gestos, silencios... y eso me hace sentir entendido de una forma única.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-icon">💬</div>
+                <div class="reason-title">Nuestras conversaciones</div>
+                <div class="reason-text">Puedo hablar contigo hasta las 2 AM y nunca sentir que es suficiente. Cada charla es un momento que atesoro.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-icon">🎮</div>
+                <div class="reason-title">"Vamos a jugar"</div>
+                <div class="reason-text">Esas dos palabras siempre me alegran el día. Gracias por acordarte de mí, por considerarme, por incluirme.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-icon">🌸</div>
+                <div class="reason-title">Tu ternura</div>
+                <div class="reason-text">Conmigo eres tierna, cálida, genuina. Me haces sentir que está bien ser vulnerable, que está bien simplemente ser yo.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-icon">✨</div>
+                <div class="reason-title">Tu constancia</div>
+                <div class="reason-text">Estás cuando nadie más está. En lo bueno, en lo malo, en lo triste, en lo feliz. Esa constancia vale más que cualquier cosa.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-icon">😊</div>
+                <div class="reason-title">Tu sonrisa</div>
+                <div class="reason-text">Aunque no la vea siempre, sé cuando estás sonriendo del otro lado. Y eso me llena de una alegría inexplicable.</div>
+            </div>
+
+            <div class="reason-card">
+                <div class="reason-icon">💙</div>
+                <div class="reason-title">Simplemente tú</div>
+                <div class="reason-text">Con tus luces y sombras, con tu forma única de ver el mundo, con todo lo que eres... me gustas exactamente así.</div>
+            </div>
+        </div>
+
+        <!-- Mensaje final -->
+        <div class="final-message">
+            <h3>Y la razón más importante...</h3>
+            <p>Porque eres TÚ. Porque no necesitas ser nadie más. Porque con solo ser quien eres, ya has hecho mi vida infinitamente mejor.</p>
+            <p style="margin-top: 30px;">🦉 💙 🐋</p>
+        </div>
+    </div>
+
+    <!-- Botón para saltar animaciones -->
+    <button class="skip-button" onclick="skipAnimations()">Ver todo ahora ⚡</button>
+
+    <script>  
+        function skipAnimations() {
+            // Ocultar pantalla de bienvenida
+            document.querySelector('.welcome-screen').style.display = 'none';
+            
+            // Quitar todas las animaciones
+            const elements = document.querySelectorAll('[style*="animation"], .letter-section, .letter-content p, .signature, .divider, .reasons-title, .reason-card, .final-message');
+            elements.forEach(el => {
+                el.classList.add('skip-animations');
+            });
+            
+            // Ocultar el botón
+            document.querySelector('.skip-button').style.display = 'none';
+        }
+
+        // Ocultar el botón automáticamente después de que terminen las animaciones
+        setTimeout(() => {
+            const btn = document.querySelector('.skip-button');
+            if (btn) {
+                btn.style.transition = 'opacity 1s ease';
+                btn.style.opacity = '0';
+                setTimeout(() => btn.style.display = 'none', 1000);
+            }
+        }, 13000);
+    </script>
+</body>
+</html>
