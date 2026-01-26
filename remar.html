@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remando juntos 🌊</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            font-family: 'Georgia', serif;
+            background: linear-gradient(180deg, #87CEEB 0%, #4A90E2 50%, #2E5F8D 100%);
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Sol */
+        .sun {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, #FFD700 0%, #FFA500 100%);
+            border-radius: 50%;
+            top: 10%;
+            right: 15%;
+            box-shadow: 0 0 60px rgba(255, 215, 0, 0.6);
+            animation: sunGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes sunGlow {
+            0%, 100% {
+                box-shadow: 0 0 60px rgba(255, 215, 0, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 80px rgba(255, 215, 0, 0.9);
+            }
+        }
+
+        /* Nubes */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 100px;
+            animation: cloudFloat 30s linear infinite;
+        }
+
+        .cloud::before,
+        .cloud::after {
+            content: '';
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 100px;
+        }
+
+        .cloud1 {
+            width: 100px;
+            height: 40px;
+            top: 15%;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .cloud1::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+
+        .cloud1::after {
+            width: 60px;
+            height: 40px;
+            top: -15px;
+            right: 10px;
+        }
+
+        .cloud2 {
+            width: 120px;
+            height: 50px;
+            top: 25%;
+            left: -120px;
+            animation-delay: 15s;
+        }
+
+        .cloud2::before {
+            width: 60px;
+            height: 60px;
+            top: -30px;
+            left: 15px;
+        }
+
+        .cloud2::after {
+            width: 70px;
+            height: 50px;
+            top: -20px;
+            right: 15px;
+        }
+
+        @keyframes cloudFloat {
+            0% {
+                left: -150px;
+            }
+            100% {
+                left: 110%;
+            }
+        }
+
+        /* Océano */
+        .ocean {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(180deg, #4A90E2 0%, #2E5F8D 50%, #1e3a5f 100%);
+            overflow: hidden;
+        }
+
+        /* Olas */
+        .wave {
+            position: absolute;
+            width: 200%;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: waveMove 8s ease-in-out infinite;
+        }
+
+        .wave1 {
+            bottom: 60%;
+            left: -50%;
+            animation-delay: 0s;
+        }
+
+        .wave2 {
+            bottom: 55%;
+            left: -60%;
+            animation-delay: 2s;
+            opacity: 0.7;
+        }
+
+        .wave3 {
+            bottom: 50%;
+            left: -70%;
+            animation-delay: 4s;
+            opacity: 0.5;
+        }
+
+        @keyframes waveMove {
+            0%, 100% {
+                transform: translateX(0) translateY(0);
+            }
+            50% {
+                transform: translateX(50px) translateY(-10px);
+            }
+        }
+
+        /* Barco contenedor */
+        .boat-container {
+            position: absolute;
+            bottom: 45%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: boatFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes boatFloat {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateX(-50%) translateY(-15px) rotate(-2deg);
+            }
+            75% {
+                transform: translateX(-50%) translateY(-10px) rotate(2deg);
+            }
+        }
+
+        /* Barco */
+        .boat {
+            position: relative;
+            width: 200px;
+            height: 80px;
+        }
+
+        /* Casco del barco */
+        .boat-body {
+            position: absolute;
+            bottom: 0;
+            width: 200px;
+            height: 50px;
+            background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+            border-radius: 0 0 100px 100px;
+            border: 3px solid #5a3510;
+        }
+
+        /* Borde del barco */
+        .boat-edge {
+            position: absolute;
+            top: -5px;
+            width: 100%;
+            height: 10px;
+            background: #654321;
+            border-radius: 5px;
+        }
+
+        /* Asientos */
+        .seat {
+            position: absolute;
+            width: 40px;
+            height: 8px;
+            background: #8B7355;
+            border-radius: 3px;
+            top: 15px;
+        }
+
+        .seat-left {
+            left: 30px;
+        }
+
+        .seat-right {
+            right: 30px;
+        }
+
+        /* Personas remando */
+        .person {
+            position: absolute;
+            bottom: 15px;
+        }
+
+        /* Persona izquierda (Valencia) */
+        .person-left {
+            left: 25px;
+        }
+
+        /* Persona derecha (Cynthia) */
+        .person-right {
+            right: 25px;
+        }
+
+        /* Cabeza */
+        .head {
+            width: 25px;
+            height: 25px;
+            background: #FFD7A8;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto;
+            border: 2px solid #E6B88A;
+        }
+
+        /* Cabello Valencia */
+        .person-left .hair {
+            position: absolute;
+            width: 100%;
+            height: 60%;
+            background: #4A4A4A;
+            border-radius: 50% 50% 0 0;
+            top: 0;
+        }
+
+        /* Cabello Cynthia */
+        .person-right .hair {
+            position: absolute;
+            width: 100%;
+            height: 80%;
+            background: #3D2817;
+            border-radius: 50%;
+            top: 0;
+        }
+
+        /* Cuerpo */
+        .body {
+            width: 20px;
+            height: 30px;
+            background: linear-gradient(135deg, #4A90E2 0%, #2E5F8D 100%);
+            border-radius: 5px;
+            margin: 2px auto 0;
+            position: relative;
+        }
+
+        /* Brazos */
+        .arm {
+            position: absolute;
+            width: 15px;
+            height: 4px;
+            background: #FFD7A8;
+            border-radius: 2px;
+            top: 5px;
+        }
+
+        .arm-left {
+            left: -12px;
+            transform: rotate(-45deg);
+            animation: rowLeft 2s ease-in-out infinite;
+        }
+
+        .arm-right {
+            right: -12px;
+            transform: rotate(45deg);
+            animation: rowRight 2s ease-in-out infinite;
+        }
+
+        @keyframes rowLeft {
+            0%, 100% {
+                transform: rotate(-45deg);
+            }
+            50% {
+                transform: rotate(-60deg);
+            }
+        }
+
+        @keyframes rowRight {
+            0%, 100% {
+                transform: rotate(45deg);
+            }
+            50% {
+                transform: rotate(60deg);
+            }
+        }
+
+        /* Remos */
+        .oar {
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: #8B4513;
+            border-radius: 2px;
+            top: 35px;
+        }
+
+        .oar-left {
+            left: -20px;
+            transform-origin: right center;
+            animation: oarRowLeft 2s ease-in-out infinite;
+        }
+
+        .oar-right {
+            right: -20px;
+            transform-origin: left center;
+            animation: oarRowRight 2s ease-in-out infinite;
+        }
+
+        /* Pala del remo */
+        .oar::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 20px;
+            background: #654321;
+            border-radius: 50%;
+        }
+
+        .oar-left::after {
+            left: -15px;
+            top: -8px;
+        }
+
+        .oar-right::after {
+            right: -15px;
+            top: -8px;
+        }
+
+        @keyframes oarRowLeft {
+            0%, 100% {
+                transform: rotate(20deg);
+            }
+            50% {
+                transform: rotate(-10deg);
+            }
+        }
+
+        @keyframes oarRowRight {
+            0%, 100% {
+                transform: rotate(-20deg);
+            }
+            50% {
+                transform: rotate(10deg);
+            }
+        }
+
+        /* Corazones flotantes */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: heartFloat 3s ease-in-out infinite;
+            opacity: 0;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 16px;
+            background: rgba(255, 105, 180, 0.8);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .heart::before {
+            left: 5px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                top: -30px;
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                top: -80px;
+                opacity: 0;
+            }
+        }
+
+        .heart:nth-child(2) {
+            animation-delay: 1s;
+            left: 45%;
+        }
+
+        .heart:nth-child(3) {
+            animation-delay: 2s;
+            left: 55%;
+        }
+
+        /* Texto romántico */
+        .romantic-text {
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: textFade 2s ease-in;
+        }
+
+        .romantic-text h1 {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .romantic-text p {
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        @keyframes textFade {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* Gaviotas */
+        .seagull {
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: seagullFly 15s linear infinite;
+        }
+
+        .seagull::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            left: -12px;
+            transform: rotate(-20deg);
+        }
+
+        .seagull::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            right: -12px;
+            transform: rotate(20deg);
+        }
+
+        .seagull1 {
+            top: 20%;
+            left: -50px;
+            animation-delay: 0s;
+        }
+
+        .seagull2 {
+            top: 18%;
+            left: -50px;
+            animation-delay: 5s;
+        }
+
+        @keyframes seagullFly {
+            0% {
+                left: -50px;
+                top: 20%;
+            }
+            50% {
+                top: 25%;
+            }
+            100% {
+                left: 110%;
+                top: 20%;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .romantic-text h1 {
+                font-size: 2rem;
+            }
+
+            .romantic-text p {
+                font-size: 1rem;
+            }
+
+            .boat {
+                transform: scale(0.8);
+            }
+
+            .sun {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .romantic-text h1 {
+                font-size: 1.5rem;
+            }
+
+            .romantic-text p {
+                font-size: 0.9rem;
+            }
+
+            .boat {
+                transform: scale(0.6);
+            }
+
+            .sun {
+                width: 60px;
+                height: 60px;
+            }
+
+            .cloud {
+                transform: scale(0.7);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sol -->
+    <div class="sun"></div>
+
+    <!-- Nubes -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+
+    <!-- Gaviotas -->
+    <div class="seagull seagull1"></div>
+    <div class="seagull seagull2"></div>
+
+    <!-- Texto romántico -->
+    <div class="romantic-text">
+        <h1>Remando juntos llegaremos a todos lados🌊</h1>
+        <p>Valencia & Cynthia</p>
+    </div>
+
+    <!-- Océano -->
+    <div class="ocean">
+        <!-- Olas -->
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+
+        <!-- Barco con personas -->
+        <div class="boat-container">
+            <div class="boat">
+                <!-- Corazones flotantes -->
+                <div class="heart"></div>
+                <div class="heart"></div>
+                <div class="heart"></div>
+
+                <!-- Casco del barco -->
+                <div class="boat-body">
+                    <div class="boat-edge"></div>
+                    
+                    <!-- Asientos -->
+                    <div class="seat seat-left"></div>
+                    <div class="seat seat-right"></div>
+
+                    <!-- Valencia (izquierda) -->
+                    <div class="person person-left">
+                        <div class="head">
+                            <div class="hair"></div>
+                        </div>
+                        <div class="body">
+                            <div class="arm arm-left"></div>
+                            <div class="arm arm-right"></div>
+                        </div>
+                        <div class="oar oar-left"></div>
+                    </div>
+
+                    <!-- Cynthia (derecha) -->
+                    <div class="person person-right">
+                        <div class="head">
+                            <div class="hair"></div>
+                        </div>
+                        <div class="body">
+                            <div class="arm arm-left"></div>
+                            <div class="arm arm-right"></div>
+                        </div>
+                        <div class="oar oar-right"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Agregar más olas dinámicamente
+        const ocean = document.querySelector('.ocean');
+        
+        for (let i = 0; i < 5; i++) {
+            const wave = document.createElement('div');
+            wave.className = 'wave';
+            wave.style.bottom = (40 + i * 10) + '%';
+            wave.style.left = (-50 - i * 10) + '%';
+            wave.style.animationDelay = (i * 1.5) + 's';
+            wave.style.opacity = (0.3 - i * 0.05);
+            ocean.appendChild(wave);
+        }
+
+        // Efecto de cambio de color del cielo (amanecer/atardecer)
+        let hue = 200;
+        setInterval(() => {
+            hue = (hue + 0.1) % 360;
+            document.body.style.background = `linear-gradient(180deg, 
+                hsl(${hue}, 70%, 70%) 0%, 
+                hsl(${hue}, 60%, 60%) 50%, 
+                hsl(${hue}, 50%, 40%) 100%)`;
+        }, 100);
+    </script>
+</body>
+</html>
