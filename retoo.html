@@ -592,23 +592,23 @@
             <!-- Pregunta 6 -->
             <div class="question-card">
                 <div class="question-number">Pregunta 6 de 10</div>
-                <div class="question-text">¿Cómo te llamo más frecuentemente?</div>
+                <div class="question-text">¿3 cosas que más me gustan de ti?</div>
                 <div class="options">
                     <div class="option" onclick="selectOption(this)">
                         <input type="radio" name="q6" value="A" id="q6a">
-                        <label for="q6a">A) Mi reina</label>
+                        <label for="q6a">A) Tus ojos, tus pies, tus codos</label>
                     </div>
                     <div class="option" onclick="selectOption(this)">
                         <input type="radio" name="q6" value="B" id="q6b">
-                        <label for="q6b">B) Preciosa</label>
+                        <label for="q6b">B) Tus lentes, tu frente jaja, tu nariz</label>
                     </div>
                     <div class="option" onclick="selectOption(this)">
                         <input type="radio" name="q6" value="C" id="q6c">
-                        <label for="q6c">C) Mi luna</label>
+                        <label for="q6c">C) Tus cejas, tu sonrisa, tus ojos</label>
                     </div>
                     <div class="option" onclick="selectOption(this)">
                         <input type="radio" name="q6" value="D" id="q6d">
-                        <label for="q6d">D) Princesa</label>
+                        <label for="q6d">D) Nadota</label>
                     </div>
                 </div>
             </div>
@@ -696,7 +696,7 @@
                     </div>
                     <div class="option" onclick="selectOption(this)">
                         <input type="radio" name="q10" value="B" id="q10b">
-                        <label for="q10b">B) "Somos complementes"</label>
+                        <label for="q10b">B) "Tenemos química de la buena"</label>
                     </div>
                     <div class="option" onclick="selectOption(this)">
                         <input type="radio" name="q10" value="C" id="q10c">
@@ -859,11 +859,10 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Descargar poema (placeholder - necesitarás subir el PDF real)
+        // Descargar poema
         function downloadPoem() {
-            alert('¡Aquí deberías poner el enlace real a tu PDF!\n\nPor ahora es solo un placeholder. Sube tu PDF y actualiza el href del botón con la URL correcta.');
-            // En producción, esto debería ser algo como:
-            // window.location.href = 'ruta-a-tu-poema.pdf';
+            // Abrir el PDF en una nueva pestaña
+            window.open('https://drive.google.com/file/d/14ufYq2JIU0aNrKAD8MgJMOrfH22Q-m83/view?usp=sharing', '_blank');
             return false;
         }
     </script>
