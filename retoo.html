@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un regalo especial para ti 💙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(180deg, #1a2332 0%, #2c3e50 50%, #34495e 100%);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fondo animado - Estrellas */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Océano en la parte inferior */
+        .ocean {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(180deg, rgba(41, 128, 185, 0.3) 0%, rgba(52, 152, 219, 0.5) 100%);
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .wave {
+            position: absolute;
+            width: 200%;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: waveMove 8s ease-in-out infinite;
+        }
+
+        .wave1 {
+            bottom: 60%;
+            left: -50%;
+            animation-delay: 0s;
+        }
+
+        .wave2 {
+            bottom: 50%;
+            left: -60%;
+            animation-delay: 2s;
+            opacity: 0.7;
+        }
+
+        .wave3 {
+            bottom: 40%;
+            left: -70%;
+            animation-delay: 4s;
+            opacity: 0.5;
+        }
+
+        @keyframes waveMove {
+            0%, 100% {
+                transform: translateX(0) translateY(0);
+            }
+            50% {
+                transform: translateX(50px) translateY(-10px);
+            }
+        }
+
+        /* Contenedor principal */
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        /* Instrucciones */
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1.5s ease-in;
+        }
+
+        .instructions h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #74b9ff;
+        }
+
+        .instructions p {
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* Sección de preguntas */
+        .quiz-section {
+            animation: fadeIn 2s ease-in;
+        }
+
+        .question-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .question-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(116, 185, 255, 0.3);
+        }
+
+        .question-number {
+            color: #74b9ff;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option:hover {
+            background: rgba(116, 185, 255, 0.2);
+            border-color: #74b9ff;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: rgba(116, 185, 255, 0.3);
+            border-color: #74b9ff;
+        }
+
+        .option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .option label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 1.1rem;
+        }
+
+        /* Botón de enviar */
+        .submit-section {
+            text-align: center;
+            margin-top: 40px;
+            animation: fadeIn 2.5s ease-in;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Resultado */
+        .result-section {
+            display: none;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .result-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #74b9ff;
+        }
+
+        .score {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #fff;
+            margin: 20px 0;
+            text-shadow: 0 0 20px rgba(116, 185, 255, 0.8);
+        }
+
+        .result-message {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin: 25px 0;
+            opacity: 0.95;
+        }
+
+        .download-section {
+            margin-top: 30px;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.4rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .retry-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+            margin-top: 20px;
+        }
+
+        .retry-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Corazones flotantes */
+        .heart {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+            z-index: 100;
+            animation: heartFloat 4s ease-in infinite;
+            opacity: 0;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 16px;
+            background: rgba(255, 105, 180, 0.8);
+            border-radius: 10px 10px 0 0;
+        }
+
+        .heart::before {
+            left: 5px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes heartFloat {
+            0% {
+                bottom: -50px;
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            80% {
+                opacity: 1;
+            }
+            100% {
+                bottom: 100%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .question-text {
+                font-size: 1.1rem;
+            }
+
+            .option label {
+                font-size: 1rem;
+            }
+
+            .submit-btn {
+                padding: 15px 40px;
+                font-size: 1.1rem;
+            }
+
+            .result-card h2 {
+                font-size: 2rem;
+            }
+
+            .score {
+                font-size: 3rem;
+            }
+
+            .download-btn {
+                padding: 18px 50px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Estrellas -->
+    <div class="stars" id="stars"></div>
+
+    <!-- Océano -->
+    <div class="ocean">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Para mi Cynthia hermosa 💙</h1>
+            <p>Un pequeño juego antes de tu regalo...</p>
+        </div>
+
+        <!-- Instrucciones -->
+        <div class="instructions">
+            <h2>📋 Instrucciones</h2>
+            <p>Mi luna, he preparado 10 preguntas sobre nosotros. Algunas son fáciles, otras te harán pensar un poco más. Si respondes correctamente al menos 7 de ellas, podrás desbloquear un regalo especial que escribí para ti.</p>
+            <p style="margin-top: 15px;">Tómate tu tiempo, piensa en nuestras conversaciones, en lo que hemos compartido... y disfruta este momento. 🌙✨</p>
+        </div>
+
+        <!-- Sección del Quiz -->
+        <div class="quiz-section" id="quizSection">
+            <!-- Pregunta 1 -->
+            <div class="question-card">
+                <div class="question-number">Pregunta 1 de 10</div>
+                <div class="question-text">¿Cuál es el animal que me representa?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q1" value="A" id="q1a">
+                        <label for="q1a">A) Lobo</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q1" value="B" id="q1b">
+                        <label for="q1b">B) Búho</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q1" value="C" id="q1c">
+                        <label for="q1c">C) Águila</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q1" value="D" id="q1d">
+                        <label for="q1d">D) Gato</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 2 -->
+            <div class="question-card">
+                <div class="question-number">Pregunta 2 de 10</div>
+                <div class="question-text">¿Cómo se llama el poema que escribí sobre ballenas y elefantes?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q2" value="A" id="q2a">
+                        <label for="q2a">A) Océano profundo</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q2" value="B" id="q2b">
+                        <label for="q2b">B) Animales del alma</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q2" value="C" id="q2c">
+                        <label for="q2c">C) Vastedad</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q2" value="D" id="q2d">
+                        <label for="q2d">D) Libertad</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 3 -->
+            <div class="question-card">
+                <div class="question-number">Pregunta 3 de 10</div>
+                <div class="question-text">¿Qué frase uso más frecuentemente para comenzar mis poemas?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q3" value="A" id="q3a">
+                        <label for="q3a">A) "Te quiero porque..."</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q3" value="B" id="q3b">
+                        <label for="q3b">B) "Cuando pienso en ti..."</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q3" value="C" id="q3c">
+                        <label for="q3c">C) "Y si supieras..."</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q3" value="D" id="q3d">
+                        <label for="q3d">D) "Eres como..."</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 4 -->
+            <div class="question-card">
+                <div class="question-number">Pregunta 4 de 10</div>
+                <div class="question-text">¿Cuál es nuestro color favorito?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q4" value="A" id="q4a">
+                        <label for="q4a">A) Rojo</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q4" value="B" id="q4b">
+                        <label for="q4b">B) Verde</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q4" value="C" id="q4c">
+                        <label for="q4c">C) Azul</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q4" value="D" id="q4d">
+                        <label for="q4d">D) Morado</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 5 -->
+            <div class="question-card">
+                <div class="question-number">Pregunta 5 de 10</div>
+                <div class="question-text">¿Qué significa para mí estar "comprometido" contigo?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q5" value="A" id="q5a">
+                        <label for="q5a">A) Que nos vamos a casar pronto</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q5" value="B" id="q5b">
+                        <label for="q5b">B) Comprometido con tu amor, respetarte y estar presente</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q5" value="C" id="q5c">
+                        <label for="q5c">C) Que te compré un anillo</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q5" value="D" id="q5d">
+                        <label for="q5d">D) Que ya tenemos fecha de boda</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 6 -->
+            <div class="question-card">
+                <div class="question-number">Pregunta 6 de 10</div>
+                <div class="question-text">¿Cómo te llamo más frecuentemente?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q6" value="A" id="q6a">
+                        <label for="q6a">A) Mi reina</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q6" value="B" id="q6b">
+                        <label for="q6b">B) Preciosa</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q6" value="C" id="q6c">
+                        <label for="q6c">C) Mi luna</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q6" value="D" id="q6d">
+                        <label for="q6d">D) Princesa</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 7 -->
+            <div class="question-card">
+                <div class="question-number">Pregunta 7 de 10</div>
+                <div class="question-text">¿Cuál fue el título del primer poema que te escribí?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q7" value="A" id="q7a">
+                        <label for="q7a">A) Para Cynthia</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q7" value="B" id="q7b">
+                        <label for="q7b">B) Antes del instante</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q7" value="C" id="q7c">
+                        <label for="q7c">C) Mi ballena</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q7" value="D" id="q7d">
+                        <label for="q7d">D) Tu nombre es mío</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 8 -->
+            <div class="question-card">
+                <div class="question-number">Pregunta 8 de 10</div>
+                <div class="question-text">¿Qué animales son tus favoritos?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q8" value="A" id="q8a">
+                        <label for="q8a">A) Perros y gatos</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q8" value="B" id="q8b">
+                        <label for="q8b">B) Ballenas y elefantes</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q8" value="C" id="q8c">
+                        <label for="q8c">C) Leones y tigres</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q8" value="D" id="q8d">
+                        <label for="q8d">D) Aves y mariposas</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 9 -->
+            <div class="question-card">
+                <div class="question-number">Pregunta 9 de 10</div>
+                <div class="question-text">¿Por qué digo que escribo?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q9" value="A" id="q9a">
+                        <label for="q9a">A) Porque soy bueno en eso</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q9" value="B" id="q9b">
+                        <label for="q9b">B) Porque me gusta</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q9" value="C" id="q9c">
+                        <label for="q9c">C) Porque es mi hobby</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q9" value="D" id="q9d">
+                        <label for="q9d">D) Porque quiero ser escritor</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pregunta 10 -->
+            <div class="question-card">
+                <div class="question-number">Pregunta 10 de 10</div>
+                <div class="question-text">¿Qué frase te digo que representa nuestra relación?</div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q10" value="A" id="q10a">
+                        <label for="q10a">A) "Nos complementamos perfectamente"</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q10" value="B" id="q10b">
+                        <label for="q10b">B) "Somos complementes"</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q10" value="C" id="q10c">
+                        <label for="q10c">C) "Somos almas gemelas"</label>
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        <input type="radio" name="q10" value="D" id="q10d">
+                        <label for="q10d">D) "Estamos destinados a estar juntos"</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón de enviar -->
+        <div class="submit-section">
+            <button class="submit-btn" onclick="submitQuiz()">Ver mi resultado 💙</button>
+        </div>
+
+        <!-- Sección de resultado -->
+        <div class="result-section" id="resultSection">
+            <div class="result-card">
+                <h2 id="resultTitle"></h2>
+                <div class="score" id="scoreDisplay"></div>
+                <div class="result-message" id="resultMessage"></div>
+                <div class="download-section" id="downloadSection" style="display: none;">
+                    <a href="#" class="download-btn" id="downloadBtn" onclick="downloadPoem()">✨ Descargar mi poema ✨</a>
+                </div>
+                <button class="retry-btn" onclick="retryQuiz()">Intentar de nuevo</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generar estrellas
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 70 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Respuestas correctas
+        const correctAnswers = {
+            q1: 'B',
+            q2: 'C',
+            q3: 'C',
+            q4: 'C',
+            q5: 'B',
+            q6: 'C',
+            q7: 'B',
+            q8: 'B',
+            q9: 'B',
+            q10: 'B'
+        };
+
+        // Seleccionar opción
+        function selectOption(element) {
+            const radio = element.querySelector('input[type="radio"]');
+            const siblings = element.parentElement.querySelectorAll('.option');
+            
+            siblings.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            radio.checked = true;
+        }
+
+        // Enviar quiz
+        function submitQuiz() {
+            let score = 0;
+            let totalQuestions = 10;
+            
+            // Verificar que todas las preguntas estén respondidas
+            for (let i = 1; i <= totalQuestions; i++) {
+                const answer = document.querySelector(`input[name="q${i}"]:checked`);
+                if (!answer) {
+                    alert('Por favor responde todas las preguntas antes de continuar 💙');
+                    return;
+                }
+                
+                if (answer.value === correctAnswers[`q${i}`]) {
+                    score++;
+                }
+            }
+            
+            // Mostrar resultado
+            showResult(score, totalQuestions);
+        }
+
+        // Mostrar resultado
+        function showResult(score, total) {
+            document.getElementById('quizSection').style.display = 'none';
+            document.querySelector('.submit-section').style.display = 'none';
+            document.querySelector('.instructions').style.display = 'none';
+            
+            const resultSection = document.getElementById('resultSection');
+            const resultTitle = document.getElementById('resultTitle');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const resultMessage = document.getElementById('resultMessage');
+            const downloadSection = document.getElementById('downloadSection');
+            
+            resultSection.style.display = 'block';
+            scoreDisplay.textContent = `${score} / ${total}`;
+            
+            // Crear corazones flotantes si aprobó
+            if (score >= 7) {
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => createHeart(), i * 200);
+                }
+            }
+            
+            // Mensajes personalizados según el puntaje
+            if (score === 10) {
+                resultTitle.textContent = '¡PERFECTO! 💙✨';
+                resultMessage.innerHTML = `Mi luna, sabía que eras increíble pero esto... esto superó mis expectativas. Respondiste TODO perfectamente. Me conoces como nadie, y eso me hace el hombre más afortunado del universo.<br><br>Aquí está tu regalo especial. Lo escribí pensando en ti, en nosotros, en todo lo que significas para mí. Disfrútalo, mi vastedad hermosa.`;
+                downloadSection.style.display = 'block';
+            } else if (score >= 7) {
+                resultTitle.textContent = '¡LO LOGRASTE! 🌙💙';
+                resultMessage.innerHTML = `Sabía que lo lograrías, preciosa. Respondiste ${score} de ${total} correctamente, y eso me demuestra lo mucho que prestas atención a lo nuestro. Me tienes aquí sonriendo como tonto solo de pensar en lo especial que eres.<br><br>Has desbloqueado tu regalo. Es un poema que escribí para ti, donde intento poner en palabras una fracción de lo que siento. Espero que te guste tanto como yo disfruté escribiéndolo.`;
+                downloadSection.style.display = 'block';
+            } else {
+                resultTitle.textContent = 'Casi lo logras 🥺💙';
+                resultMessage.innerHTML = `Mi vida, respondiste ${score} de ${total} correctamente. Necesitabas 7 para desbloquear el regalo. Pero no te preocupes, esto solo significa que tenemos más cosas por descubrir juntos, más conversaciones por tener, más momentos por vivir.<br><br>Inténtalo de nuevo cuando quieras, sin presión. Al final, lo importante no es el puntaje, sino que estés aquí, leyendo esto, siendo tú. Eso ya es suficiente regalo para mí. 🌙`;
+                downloadSection.style.display = 'none';
+            }
+            
+            // Scroll al resultado
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Crear corazones flotantes
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        // Reintentar quiz
+        function retryQuiz() {
+            // Limpiar selecciones
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.checked = false;
+            });
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            // Mostrar quiz de nuevo
+            document.getElementById('quizSection').style.display = 'block';
+            document.querySelector('.submit-section').style.display = 'block';
+            document.querySelector('.instructions').style.display = 'block';
+            document.getElementById('resultSection').style.display = 'none';
+            
+            // Scroll al inicio
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Descargar poema (placeholder - necesitarás subir el PDF real)
+        function downloadPoem() {
+            alert('¡Aquí deberías poner el enlace real a tu PDF!\n\nPor ahora es solo un placeholder. Sube tu PDF y actualiza el href del botón con la URL correcta.');
+            // En producción, esto debería ser algo como:
+            // window.location.href = 'ruta-a-tu-poema.pdf';
+            return false;
+        }
+    </script>
+</body>
+</html>
