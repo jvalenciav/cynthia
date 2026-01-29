@@ -463,7 +463,7 @@
         <!-- Instrucciones -->
         <div class="instructions">
             <h2>📋 Instrucciones</h2>
-            <p>Mi luna, he preparado 10 preguntas sobre nosotros. Algunas son fáciles, otras te harán pensar un poco más. Si respondes correctamente al menos 7 de ellas, podrás desbloquear un regalo especial que escribí para ti.</p>
+            <p>Mi reina, he preparado 10 preguntas sobre nosotros. Algunas son fáciles, otras te harán pensar un poco más. Si respondes correctamente al menos 7 de ellas, podrás desbloquear un regalo especial que escribí para ti.</p>
             <p style="margin-top: 15px;">Tómate tu tiempo, piensa en nuestras conversaciones, en lo que hemos compartido... y disfruta este momento. 🌙✨</p>
         </div>
 
@@ -472,7 +472,7 @@
             <!-- Pregunta 1 -->
             <div class="question-card">
                 <div class="question-number">Pregunta 1 de 10</div>
-                <div class="question-text">¿Cuál es el animal que me representa?</div>
+                <div class="question-text">¿Cuál es el animal que me gusta?</div>
                 <div class="options">
                     <div class="option" onclick="selectOption(this)">
                         <input type="radio" name="q1" value="A" id="q1a">
@@ -692,11 +692,11 @@
                 <div class="options">
                     <div class="option" onclick="selectOption(this)">
                         <input type="radio" name="q10" value="A" id="q10a">
-                        <label for="q10a">A) "Nos complementamos perfectamente"</label>
+                        <label for="q10a">A) "Nadota"</label>
                     </div>
                     <div class="option" onclick="selectOption(this)">
                         <input type="radio" name="q10" value="B" id="q10b">
-                        <label for="q10b">B) "Tenemos química de la buena"</label>
+                        <label for="q10b">B) "Nos complementamos perfectamente "</label>
                     </div>
                     <div class="option" onclick="selectOption(this)">
                         <input type="radio" name="q10" value="C" id="q10c">
@@ -812,7 +812,7 @@
             // Mensajes personalizados según el puntaje
             if (score === 10) {
                 resultTitle.textContent = '¡PERFECTO! 💙✨';
-                resultMessage.innerHTML = `Mi luna, sabía que eras increíble pero esto... esto superó mis expectativas. Respondiste TODO perfectamente. Me conoces como nadie, y eso me hace el hombre más afortunado del universo.<br><br>Aquí está tu regalo especial. Lo escribí pensando en ti, en nosotros, en todo lo que significas para mí. Disfrútalo, mi vastedad hermosa.`;
+                resultMessage.innerHTML = `Guapa, sabía que eras increíble pero esto... esto superó mis expectativas. Respondiste TODO perfectamente. Me conoces como nadie, y eso me hace el hombre más afortunado del universo.<br><br>Aquí está tu regalo especial. Lo escribí pensando en ti, en nosotros, en todo lo que significas para mí. Disfrútalo, mi vastedad hermosa.`;
                 downloadSection.style.display = 'block';
             } else if (score >= 7) {
                 resultTitle.textContent = '¡LO LOGRASTE! 🌙💙';
