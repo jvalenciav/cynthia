@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para ti, mi luna 📖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        /* === CONTENEDOR DEL LIBRO === */
+        .libro-container {
+            position: relative;
+            width: 90vw;
+            max-width: 1200px;
+            height: 85vh;
+            max-height: 800px;
+            perspective: 2000px;
+        }
+
+        /* === LIBRO === */
+        .libro {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+        }
+
+        /* === PÁGINA === */
+        .pagina {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+            border-radius: 5px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            display: none;
+            overflow: hidden;
+        }
+
+        .pagina.activa {
+            display: block;
+            animation: pageIn 0.6s ease forwards;
+        }
+
+        .pagina.saliendo {
+            display: block;
+            animation: pageOut 0.6s ease forwards;
+        }
+
+        @keyframes pageIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pageOut {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+        }
+
+        /* === CONTENIDO DE PÁGINA === */
+        .pagina-contenido {
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+
+        /* === PÁGINA INDIVIDUAL (PORTADA, CONTRAPORTADA) === */
+        .pagina-simple {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+            text-align: center;
+        }
+
+        /* === PÁGINA DOBLE === */
+        .pagina-izquierda,
+        .pagina-derecha {
+            width: 50%;
+            height: 100%;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .pagina-izquierda {
+            background: linear-gradient(to right, #e9ecef, #f8f9fa);
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pagina-derecha {
+            background: #f8f9fa;
+        }
+
+        /* === ESTILOS DE TEXTO === */
+        .titulo-grande {
+            font-size: 3.5rem;
+            color: #74b9ff;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitulo {
+            font-size: 1.8rem;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .titulo-capitulo {
+            font-size: 2.5rem;
+            color: #74b9ff;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            text-align: center;
+        }
+
+        .texto-cuerpo {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #333;
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+
+        .texto-centrado {
+            text-align: center;
+        }
+
+        .ilustracion-grande {
+            font-size: 8rem;
+            margin: 2rem 0;
+            filter: drop-shadow(0 5px 15px rgba(116, 185, 255, 0.3));
+        }
+
+        .ilustracion-mediana {
+            font-size: 5rem;
+            margin: 1.5rem 0;
+            opacity: 0.8;
+        }
+
+        /* === LISTA DE RAZONES === */
+        .razones-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.8rem;
+            max-height: 100%;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+
+        .razon-item {
+            font-size: 1.1rem;
+            color: #444;
+            padding: 0.8rem;
+            background: rgba(116, 185, 255, 0.05);
+            border-left: 3px solid #74b9ff;
+            border-radius: 3px;
+        }
+
+        /* === CONTROLES DE NAVEGACIÓN === */
+        .controles {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-navegacion {
+            background: #74b9ff;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Georgia', serif;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+        }
+
+        .btn-navegacion:hover {
+            background: #5a9fd4;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(116, 185, 255, 0.4);
+        }
+
+        .btn-navegacion:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .progreso {
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        /* === SÍMBOLOS DECORATIVOS === */
+        .simbolos-decorativos {
+            font-size: 2rem;
+            margin: 2rem 0;
+            opacity: 0.6;
+        }
+
+        .linea-decorativa {
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #74b9ff, transparent);
+            margin: 2rem auto;
+        }
+
+        /* === ANIMACIONES === */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .flotante {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* === SCROLLBAR PERSONALIZADO === */
+        .razones-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .razones-grid::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+
+        .razones-grid::-webkit-scrollbar-thumb {
+            background: #74b9ff;
+            border-radius: 10px;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .libro-container {
+                width: 95vw;
+                height: 90vh;
+            }
+
+            .pagina-contenido {
+                flex-direction: column;
+            }
+
+            .pagina-izquierda,
+            .pagina-derecha {
+                width: 100%;
+                height: 50%;
+                padding: 2rem;
+            }
+
+            .pagina-izquierda {
+                border-right: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            .titulo-grande {
+                font-size: 2.5rem;
+            }
+
+            .subtitulo {
+                font-size: 1.3rem;
+            }
+
+            .titulo-capitulo {
+                font-size: 1.8rem;
+            }
+
+            .texto-cuerpo {
+                font-size: 1.1rem;
+                line-height: 1.8;
+            }
+
+            .ilustracion-grande {
+                font-size: 5rem;
+            }
+
+            .ilustracion-mediana {
+                font-size: 3.5rem;
+            }
+
+            .controles {
+                padding: 0.8rem 1.5rem;
+                gap: 1rem;
+            }
+
+            .btn-navegacion {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+
+            .progreso {
+                font-size: 1rem;
+            }
+
+            .razones-grid {
+                gap: 0.6rem;
+            }
+
+            .razon-item {
+                font-size: 1rem;
+                padding: 0.6rem;
+            }
+        }
+
+        /* === EFECTO DE PAPEL === */
+        .pagina::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0,0,0,0.01) 2px,
+                    rgba(0,0,0,0.01) 4px
+                );
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="libro-container">
+        <div class="libro">
+            <!-- PORTADA -->
+            <div class="pagina activa" data-pagina="0">
+                <div class="pagina-simple">
+                    <div class="simbolos-decorativos">🦉 ✦ 🌙 ✦ 🐋</div>
+                    <h1 class="titulo-grande">Para Cynthia</h1>
+                    <p class="subtitulo">mi luna</p>
+                    <div class="linea-decorativa"></div>
+                    <p class="texto-cuerpo texto-centrado" style="margin-top: 2rem; font-style: italic; color: #666;">
+                        Un libro hecho con cada latido de mi corazón
+                    </p>
+                    <div class="ilustracion-mediana flotante">📖</div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 1: ANTES DE TI -->
+            <div class="pagina" data-pagina="1">
+                <div class="pagina-contenido">
+                    <div class="pagina-izquierda">
+                        <div class="ilustracion-grande flotante">🦉</div>
+                    </div>
+                    <div class="pagina-derecha">
+                        <h2 class="titulo-capitulo">Antes de ti</h2>
+                        <div class="linea-decorativa"></div>
+                        <p class="texto-cuerpo">Había un búho que observaba el mundo desde su rama.</p>
+                        <p class="texto-cuerpo">Veía todo, pero nada lo llenaba.</p>
+                        <p class="texto-cuerpo">Solo existía. Flotaba. Esperaba algo que no sabía nombrar.</p>
+                        <p class="texto-cuerpo">Hasta que llegaste tú.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 2: EL ENCUENTRO -->
+            <div class="pagina" data-pagina="2">
+                <div class="pagina-contenido">
+                    <div class="pagina-izquierda">
+                        <div style="display: flex; gap: 2rem; justify-content: center; align-items: center;">
+                            <div class="ilustracion-mediana">🦉</div>
+                            <div style="font-size: 2rem; color: #74b9ff;">✦</div>
+                            <div class="ilustracion-mediana">🐋</div>
+                        </div>
+                    </div>
+                    <div class="pagina-derecha">
+                        <h2 class="titulo-capitulo">El encuentro</h2>
+                        <div class="linea-decorativa"></div>
+                        <p class="texto-cuerpo">Y entonces llegaste.</p>
+                        <p class="texto-cuerpo">Una ballena navegando su propia vastedad. Profunda. Tranquila. Libre.</p>
+                        <p class="texto-cuerpo">Y algo en el universo hizo clic.</p>
+                        <p class="texto-cuerpo">Dos mundos que no deberían conectar... se encontraron.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 3: LA CALMA -->
+            <div class="pagina" data-pagina="3">
+                <div class="pagina-contenido">
+                    <div class="pagina-izquierda">
+                        <div class="ilustracion-grande flotante">🌊</div>
+                    </div>
+                    <div class="pagina-derecha">
+                        <h2 class="titulo-capitulo">La calma que trajiste</h2>
+                        <div class="linea-decorativa"></div>
+                        <p class="texto-cuerpo">Conocerte fue como encontrar silencio en medio del ruido constante.</p>
+                        <p class="texto-cuerpo">No el silencio vacío, sino ese que está lleno de todo lo importante.</p>
+                        <p class="texto-cuerpo">Eres calma, Cynthia. De esas que no se enseñan ni se aprenden.</p>
+                        <p class="texto-cuerpo">De las que simplemente son.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 4: LAS 2 AM -->
+            <div class="pagina" data-pagina="4">
+                <div class="pagina-contenido">
+                    <div class="pagina-izquierda">
+                        <div class="ilustracion-grande flotante">🌙</div>
+                    </div>
+                    <div class="pagina-derecha">
+                        <h2 class="titulo-capitulo">Las 2 AM</h2>
+                        <div class="linea-decorativa"></div>
+                        <p class="texto-cuerpo">Las 2 AM tienen otro nombre cuando hablas tú.</p>
+                        <p class="texto-cuerpo">Ya no es insomnio, ni ansiedad, ni tiempo perdido.</p>
+                        <p class="texto-cuerpo">Es ese momento donde tú y yo somos más reales. Donde no fingimos.</p>
+                        <p class="texto-cuerpo">Las 2 AM son nuestras. Y yo no quiero cambiarlas por nada.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 5: TU VASTEDAD -->
+            <div class="pagina" data-pagina="5">
+                <div class="pagina-contenido">
+                    <div class="pagina-izquierda">
+                        <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+                            <div class="ilustracion-mediana">🐋</div>
+                            <div class="ilustracion-mediana">🐘</div>
+                        </div>
+                    </div>
+                    <div class="pagina-derecha">
+                        <h2 class="titulo-capitulo">Tu vastedad</h2>
+                        <div class="linea-decorativa"></div>
+                        <p class="texto-cuerpo">Cuando pienso en ti veo ballenas, esas que navegan la vastedad en busca de su propia voz.</p>
+                        <p class="texto-cuerpo">Y elefantes que avanzan despacio, guardando en su pecho el peso de lo vivido.</p>
+                        <p class="texto-cuerpo">Seres inmensos que no necesitan gritar para existir.</p>
+                        <p class="texto-cuerpo">Así te veo yo: grande en esencia, eterna en lo sutil.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 6: RAZONES (PARTE 1) -->
+            <div class="pagina" data-pagina="6">
+                <div class="pagina-contenido">
+                    <div class="pagina-izquierda">
+                        <h2 class="titulo-capitulo">Razones por las que te quiero</h2>
+                        <div class="linea-decorativa"></div>
+                        <div class="ilustracion-mediana">💙</div>
+                        <p class="texto-cuerpo texto-centrado" style="font-style: italic; color: #666;">
+                            (Hay tantas que necesito dos páginas)
+                        </p>
+                    </div>
+                    <div class="pagina-derecha">
+                        <div class="razones-grid">
+                            <div class="razon-item">Tu calma que desarma todo mi caos</div>
+                            <div class="razon-item">Cómo amas a los animales con ternura infinita</div>
+                            <div class="razon-item">Tu risa que rompe el silencio más hermoso</div>
+                            <div class="razon-item">La forma en que me miras como si realmente me vieras</div>
+                            <div class="razon-item">Tu bondad que no pide reconocimiento</div>
+                            <div class="razon-item">Cómo eres profunda sin necesidad de demostrarlo</div>
+                            <div class="razon-item">Tu forma de existir sin esfuerzo</div>
+                            <div class="razon-item">Las conversaciones de madrugada que no quieren terminar</div>
+                            <div class="razon-item">Cómo me haces sentir seguro de ser vulnerable</div>
+                            <div class="razon-item">Tu vastedad interior que me deja sin palabras</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 7: RAZONES (PARTE 2) -->
+            <div class="pagina" data-pagina="7">
+                <div class="pagina-contenido">
+                    <div class="pagina-izquierda">
+                        <div class="razones-grid">
+                            <div class="razon-item">La paz que traes a mi vida sin intentarlo</div>
+                            <div class="razon-item">Cómo entiendes mis silencios</div>
+                            <div class="razon-item">Tu presencia que es refugio</div>
+                            <div class="razon-item">La forma en que sonríes con los ojos</div>
+                            <div class="razon-item">Cómo me inspiras a ser mejor persona</div>
+                            <div class="razon-item">Tu luz tranquila que no necesita gritar</div>
+                            <div class="razon-item">La certeza que siento cuando estoy contigo</div>
+                            <div class="razon-item">Cómo haces que todo tenga más sentido</div>
+                            <div class="razon-item">Tu forma de amar sin condiciones</div>
+                            <div class="razon-item">Porque eres exactamente lo que no sabía que necesitaba</div>
+                        </div>
+                    </div>
+                    <div class="pagina-derecha">
+                        <div style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <div class="ilustracion-mediana">⭐</div>
+                            <p class="texto-cuerpo texto-centrado" style="margin-top: 2rem; font-style: italic;">
+                                Y hay tantas más que todavía no encuentro palabras para nombrar...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 8: MOMENTOS -->
+            <div class="pagina" data-pagina="8">
+                <div class="pagina-contenido">
+                    <div class="pagina-izquierda">
+                        <div class="ilustracion-grande flotante">✨</div>
+                    </div>
+                    <div class="pagina-derecha">
+                        <h2 class="titulo-capitulo">Momentos que guardo</h2>
+                        <div class="linea-decorativa"></div>
+                        <p class="texto-cuerpo">La primera vez que tu risa me desarmó completamente.</p>
+                        <p class="texto-cuerpo">Ese mensaje de madrugada donde sentí que realmente me entendías.</p>
+                        <p class="texto-cuerpo">Cuando dijiste algo y supe que esto era diferente.</p>
+                        <p class="texto-cuerpo">Cada "te quiero" que me has dado y que guardo como tesoro.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 9: LO QUE ME HACES SENTIR -->
+            <div class="pagina" data-pagina="9">
+                <div class="pagina-contenido">
+                    <div class="pagina-izquierda">
+                        <div class="ilustracion-grande flotante">💫</div>
+                    </div>
+                    <div class="pagina-derecha">
+                        <h2 class="titulo-capitulo">Lo que me haces sentir</h2>
+                        <div class="linea-decorativa"></div>
+                        <p class="texto-cuerpo">Me haces sentir vivo de formas que no sabía que existían.</p>
+                        <p class="texto-cuerpo">Me haces sentir certeza. La del tipo tranquilo.</p>
+                        <p class="texto-cuerpo">Me haces sentir inspirado a ser mejor.</p>
+                        <p class="texto-cuerpo">Me haces sentir que por primera vez, soy suficiente.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 10: EL FUTURO -->
+            <div class="pagina" data-pagina="10">
+                <div class="pagina-contenido">
+                    <div class="pagina-izquierda">
+                        <div class="ilustracion-grande flotante">🌅</div>
+                    </div>
+                    <div class="pagina-derecha">
+                        <h2 class="titulo-capitulo">El futuro</h2>
+                        <div class="linea-decorativa"></div>
+                        <p class="texto-cuerpo">Quiero construir algo contigo.</p>
+                        <p class="texto-cuerpo">No sé exactamente cómo se ve, pero sé que tú estás ahí.</p>
+                        <p class="texto-cuerpo">Quiero todas las madrugadas contigo. Quiero los silencios compartidos.</p>
+                        <p class="texto-cuerpo">Quiero seguir descubriendo tu profundidad por el resto de mi vida.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 11: MENSAJE FINAL -->
+            <div class="pagina" data-pagina="11">
+                <div class="pagina-contenido">
+                    <div class="pagina-izquierda">
+                        <div class="ilustracion-grande flotante">🌙</div>
+                    </div>
+                    <div class="pagina-derecha">
+                        <h2 class="titulo-capitulo">Mi Luna</h2>
+                        <div class="linea-decorativa"></div>
+                        <p class="texto-cuerpo">Llegaste como llega la luna: sin avisar, necesaria, perfecta.</p>
+                        <p class="texto-cuerpo">Iluminaste todo lo que estaba oscuro sin que yo supiera que necesitaba luz.</p>
+                        <p class="texto-cuerpo">Eres vastedad. Eres calma. Eres profundidad.</p>
+                        <p class="texto-cuerpo">Eres todo lo que no sabía que estaba buscando.</p>
+                        <p class="texto-cuerpo" style="margin-top: 2rem; font-style: italic; color: #74b9ff;">
+                            Con todo mi amor,<br>tu fan número 1 🦉💙
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTRAPORTADA -->
+            <div class="pagina" data-pagina="12">
+                <div class="pagina-simple">
+                    <div class="linea-decorativa"></div>
+                    <p class="texto-cuerpo texto-centrado" style="font-size: 1.5rem; margin-bottom: 2rem;">
+                        Este libro no tiene fin.
+                    </p>
+                    <p class="texto-cuerpo texto-centrado" style="font-style: italic; color: #666; margin-bottom: 2rem;">
+                        Mientras sigas siendo tú,<br>yo seguiré escribiendo.
+                    </p>
+                    <div class="linea-decorativa"></div>
+                    <div class="simbolos-decorativos" style="margin-top: 3rem;">🦉 ✦ 🌙 ✦ 🐋</div>
+                    <p class="texto-cuerpo texto-centrado" style="margin-top: 2rem; font-size: 1.1rem; color: #999;">
+                        14 de febrero, 2026
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTROLES -->
+    <div class="controles">
+        <button class="btn-navegacion" id="btn-anterior" disabled>
+            ← Anterior
+        </button>
+        <span class="progreso" id="progreso">Página 1 de 13</span>
+        <button class="btn-navegacion" id="btn-siguiente">
+            Siguiente →
+        </button>
+    </div>
+
+    <script>
+        // Variables globales
+        let paginaActual = 0;
+        const totalPaginas = 13;
+        const paginas = document.querySelectorAll('.pagina');
+        const btnAnterior = document.getElementById('btn-anterior');
+        const btnSiguiente = document.getElementById('btn-siguiente');
+        const progresoTexto = document.getElementById('progreso');
+
+        // Función para actualizar la página
+        function actualizarPagina() {
+            // Ocultar todas las páginas
+            paginas.forEach((pagina, index) => {
+                pagina.classList.remove('activa', 'saliendo');
+                if (index === paginaActual) {
+                    pagina.classList.add('activa');
+                }
+            });
+
+            // Actualizar progreso
+            progresoTexto.textContent = `Página ${paginaActual + 1} de ${totalPaginas}`;
+
+            // Actualizar estado de botones
+            btnAnterior.disabled = paginaActual === 0;
+            btnSiguiente.disabled = paginaActual === totalPaginas - 1;
+
+            // Scroll al top
+            window.scrollTo(0, 0);
+        }
+
+        // Función para ir a la siguiente página
+        function siguientePagina() {
+            if (paginaActual < totalPaginas - 1) {
+                const paginaActualElement = paginas[paginaActual];
+                paginaActualElement.classList.remove('activa');
+                paginaActualElement.classList.add('saliendo');
+                
+                setTimeout(() => {
+                    paginaActual++;
+                    actualizarPagina();
+                }, 300);
+            }
+        }
+
+        // Función para ir a la página anterior
+        function anteriorPagina() {
+            if (paginaActual > 0) {
+                const paginaActualElement = paginas[paginaActual];
+                paginaActualElement.classList.remove('activa');
+                paginaActualElement.classList.add('saliendo');
+                
+                setTimeout(() => {
+                    paginaActual--;
+                    actualizarPagina();
+                }, 300);
+            }
+        }
+
+        // Event listeners
+        btnSiguiente.addEventListener('click', siguientePagina);
+        btnAnterior.addEventListener('click', anteriorPagina);
+
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                siguientePagina();
+            } else if (e.key === 'ArrowLeft') {
+                anteriorPagina();
+            }
+        });
+
+        // Swipe en mobile/iPad
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            if (touchEndX < touchStartX - swipeThreshold) {
+                // Swipe left - siguiente página
+                siguientePagina();
+            }
+            if (touchEndX > touchStartX + swipeThreshold) {
+                // Swipe right - página anterior
+                anteriorPagina();
+            }
+        }
+
+        // Inicializar
+        actualizarPagina();
+    </script>
+</body>
+</html>
