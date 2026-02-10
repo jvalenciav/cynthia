@@ -101,6 +101,16 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
+            opacity: 0;
+        }
+
+        body:not(.loading) #acto1 {
+            animation: fadeInSection 2s ease forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeInSection {
+            to { opacity: 1; }
         }
 
         .particulas-container {
@@ -133,7 +143,11 @@
             margin-bottom: 2rem;
             color: #74b9ff;
             opacity: 0;
+        }
+
+        body:not(.loading) .texto-acto h2 {
             animation: fadeInUp 1.5s ease forwards;
+            animation-delay: 2s;
         }
 
         .texto-acto p {
@@ -142,12 +156,15 @@
             color: #ccc;
             margin-bottom: 1.5rem;
             opacity: 0;
+        }
+
+        body:not(.loading) .texto-acto p {
             animation: fadeInUp 1.5s ease forwards;
         }
 
-        .texto-acto p:nth-child(2) { animation-delay: 0.5s; }
-        .texto-acto p:nth-child(3) { animation-delay: 1s; }
-        .texto-acto p:nth-child(4) { animation-delay: 1.5s; }
+        body:not(.loading) .texto-acto p:nth-child(2) { animation-delay: 3s; }
+        body:not(.loading) .texto-acto p:nth-child(3) { animation-delay: 4s; }
+        body:not(.loading) .texto-acto p:nth-child(4) { animation-delay: 5s; }
 
         @keyframes fadeInUp {
             from {
@@ -166,8 +183,17 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 8rem;
-            opacity: 0.3;
+            opacity: 0;
             filter: grayscale(100%);
+        }
+
+        body:not(.loading) .buho-ilustracion {
+            animation: fadeIn 2s ease forwards;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 0.3; }
         }
 
         /* === ACTO 2: EL ENCUENTRO === */
@@ -675,7 +701,7 @@
             <p>Porque tú eres esa luz tranquila que no necesita gritar para brillar.</p>
             <p>Eres vastedad. Eres calma. Eres profundidad.</p>
             <p>Eres todo lo que no sabía que estaba buscando.</p>
-            <p class="firma">Con todo mi amor, tu búho 🦉💙</p>
+            <p class="firma">Con todo mi amor, tu fan número 1 🦉💙</p>
             <p class="simbolos-finales">🦉 ✦ 🌙 ✦ 🐋</p>
         </div>
     </section>
