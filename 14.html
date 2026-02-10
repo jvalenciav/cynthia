@@ -520,6 +520,53 @@
             font-size: 2rem;
         }
 
+        /* === BOTÓN AL LIBRO === */
+        .btn-libro {
+            display: inline-block;
+            margin-top: 3rem;
+            padding: 1.5rem 3rem;
+            background: linear-gradient(135deg, #74b9ff, #a29bfe);
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            font-family: 'Georgia', serif;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(116, 185, 255, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .btn-libro:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(116, 185, 255, 0.6);
+            background: linear-gradient(135deg, #5a9fd4, #8b7fd8);
+        }
+
+        .btn-libro:active {
+            transform: translateY(-2px);
+        }
+
+        .btn-libro-container {
+            text-align: center;
+            animation: fadeInUp 2s ease forwards;
+            animation-delay: 1s;
+            opacity: 0;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 10px 30px rgba(116, 185, 255, 0.4);
+            }
+            50% {
+                box-shadow: 0 15px 50px rgba(116, 185, 255, 0.7);
+            }
+        }
+
+        .btn-libro {
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+
         /* === SCROLL INDICATOR === */
         .scroll-indicator {
             position: fixed;
@@ -703,6 +750,15 @@
             <p>Eres todo lo que no sabía que estaba buscando.</p>
             <p class="firma">Con todo mi amor, tu fan número 1 🦉💙</p>
             <p class="simbolos-finales">🦉 ✦ 🌙 ✦ 🐋</p>
+            
+            <div class="btn-libro-container">
+                <p style="font-size: 1.2rem; color: #ccc; margin-bottom: 1rem; font-style: italic;">
+                    Pero esto no termina aquí...
+                </p>
+                <a href="libro.html" class="btn-libro">
+                    📖 Abrir tu libro
+                </a>
+            </div>
         </div>
     </section>
 
