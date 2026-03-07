@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para ti, Cynthia 🌸</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+```
+    body {
+        font-family: 'Georgia', serif;
+        overflow-x: hidden;
+        background: #87CEEB;
+        touch-action: pan-y;
+    }
+
+    /* CIELO CON NUBES */
+    .cielo {
+        position: relative;
+        width: 100%;
+        height: 40vh;
+        background: linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 100%);
+        overflow: hidden;
+    }
+
+    .sol {
+        position: absolute;
+        top: 10%;
+        right: 10%;
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(circle, #FFD700, #FFA500);
+        border-radius: 50%;
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+        animation: brillar 3s ease-in-out infinite;
+    }
+
+    @keyframes brillar {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    .nube {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 100px;
+        animation: moverNube 20s linear infinite;
+    }
+
+    .nube::before,
+    .nube::after {
+        content: '';
+        position: absolute;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 100px;
+    }
+
+    .nube1 {
+        width: 100px;
+        height: 40px;
+        top: 20%;
+        left: -100px;
+    }
+
+    .nube1::before {
+        width: 50px;
+        height: 40px;
+        top: -20px;
+        left: 10px;
+    }
+
+    .nube1::after {
+        width: 60px;
+        height: 30px;
+        top: -10px;
+        right: 10px;
+    }
+
+    .nube2 {
+        width: 120px;
+        height: 45px;
+        top: 50%;
+        left: -120px;
+        animation-delay: 5s;
+    }
+
+    .nube2::before {
+        width: 60px;
+        height: 45px;
+        top: -25px;
+        left: 15px;
+    }
+
+    .nube2::after {
+        width: 70px;
+        height: 35px;
+        top: -15px;
+        right: 15px;
+    }
+
+    .nube3 {
+        width: 90px;
+        height: 35px;
+        top: 70%;
+        left: -90px;
+        animation-delay: 10s;
+    }
+
+    .nube3::before {
+        width: 45px;
+        height: 35px;
+        top: -18px;
+        left: 12px;
+    }
+
+    .nube3::after {
+        width: 50px;
+        height: 28px;
+        top: -12px;
+        right: 12px;
+    }
+
+    @keyframes moverNube {
+        from { left: -150px; }
+        to { left: 110%; }
+    }
+
+    /* MONTAÑAS */
+    .montanas {
+        position: relative;
+        width: 100%;
+        height: 25vh;
+        background: linear-gradient(to top, #2F5233, #3D6B3F);
+    }
+
+    .montana {
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+    }
+
+    .montana1 {
+        left: 0;
+        border-width: 0 0 25vh 40vw;
+        border-color: transparent transparent #4A7C59 transparent;
+    }
+
+    .montana2 {
+        left: 30vw;
+        border-width: 0 0 20vh 35vw;
+        border-color: transparent transparent #5A8C69 transparent;
+    }
+
+    .montana3 {
+        left: 55vw;
+        border-width: 0 0 22vh 45vw;
+        border-color: transparent transparent #3D6B3F transparent;
+    }
+
+    /* CAMPO CON FLORES */
+    .campo {
+        position: relative;
+        width: 100%;
+        min-height: 35vh;
+        background: linear-gradient(to bottom, #7CB342 0%, #558B2F 100%);
+        padding: 2rem 0;
+    }
+
+    .flor {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation: mecerFlor 3s ease-in-out infinite;
+    }
+
+    @keyframes mecerFlor {
+        0%, 100% { transform: rotate(0deg); }
+        50% { transform: rotate(5deg); }
+    }
+
+    .petalo-container {
+        position: relative;
+        width: 30px;
+        height: 30px;
+    }
+
+    .petalo {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+    }
+
+    .petalo:nth-child(1) { top: -8px; left: 9px; }
+    .petalo:nth-child(2) { top: 9px; left: 18px; }
+    .petalo:nth-child(3) { top: 18px; left: 9px; }
+    .petalo:nth-child(4) { top: 9px; left: 0; }
+
+    .centro-flor {
+        position: absolute;
+        top: 9px;
+        left: 9px;
+        width: 12px;
+        height: 12px;
+        background: #FFD700;
+        border-radius: 50%;
+    }
+
+    .tallo {
+        width: 3px;
+        height: 40px;
+        background: #2E7D32;
+        border-radius: 2px;
+    }
+
+    /* ANIMALES */
+    .animal {
+        position: absolute;
+        font-size: 3rem;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+    }
+
+    .animal:active {
+        transform: scale(1.3);
+    }
+
+    .animal-mensaje {
+        position: absolute;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1rem;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        color: #333;
+        max-width: 200px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        text-align: center;
+        font-family: 'Georgia', serif;
+    }
+
+    .animal-mensaje.visible {
+        opacity: 1;
+    }
+
+    /* Animaciones de animales */
+    .mariposa {
+        animation: volarMariposa 8s ease-in-out infinite;
+    }
+
+    @keyframes volarMariposa {
+        0%, 100% { transform: translate(0, 0); }
+        25% { transform: translate(30px, -20px); }
+        50% { transform: translate(60px, 0); }
+        75% { transform: translate(30px, 20px); }
+    }
+
+    .pajaro {
+        animation: volarPajaro 15s linear infinite;
+    }
+
+    @keyframes volarPajaro {
+        from { left: -50px; }
+        to { left: 110%; }
+    }
+
+    /* MENSAJE PRINCIPAL */
+    .mensaje-principal {
+        position: relative;
+        background: rgba(255, 255, 255, 0.95);
+        margin: 2rem auto;
+        padding: 2rem;
+        max-width: 90%;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        text-align: center;
+    }
+
+    .mensaje-principal h1 {
+        color: #74b9ff;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-weight: 300;
+    }
+
+    .mensaje-principal p {
+        color: #333;
+        font-size: 1.2rem;
+        line-height: 1.8;
+        margin-bottom: 1rem;
+    }
+
+    .firma {
+        margin-top: 2rem;
+        color: #74b9ff;
+        font-style: italic;
+        font-size: 1.1rem;
+    }
+
+    /* CORAZONES FLOTANTES */
+    .corazon {
+        position: absolute;
+        font-size: 1.5rem;
+        animation: floatHeart 6s ease-in-out infinite;
+        opacity: 0.7;
+    }
+
+    @keyframes floatHeart {
+        0% { transform: translateY(0) scale(1); opacity: 0.7; }
+        50% { transform: translateY(-30px) scale(1.2); opacity: 1; }
+        100% { transform: translateY(0) scale(1); opacity: 0.7; }
+    }
+
+    /* ARCOÍRIS */
+    .arcoiris {
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        width: 150px;
+        height: 75px;
+        border-radius: 150px 150px 0 0;
+        opacity: 0.6;
+    }
+
+    .arco {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 150px 150px 0 0;
+        border-style: solid;
+        border-width: 8px 0 0 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+        .sol {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .mensaje-principal h1 {
+            font-size: 1.5rem;
+        }
+        
+        .mensaje-principal p {
+            font-size: 1rem;
+        }
+        
+        .animal {
+            font-size: 2.5rem;
+        }
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- CIELO -->
+    <div class="cielo">
+        <div class="sol"></div>
+
+```
+    <!-- Arcoíris -->
+    <div class="arcoiris">
+        <div class="arco" style="border-color: #FF0000 transparent transparent transparent; width: 100%; height: 100%;"></div>
+        <div class="arco" style="border-color: #FFA500 transparent transparent transparent; width: 95%; height: 95%; left: 2.5%;"></div>
+        <div class="arco" style="border-color: #FFFF00 transparent transparent transparent; width: 90%; height: 90%; left: 5%;"></div>
+        <div class="arco" style="border-color: #00FF00 transparent transparent transparent; width: 85%; height: 85%; left: 7.5%;"></div>
+        <div class="arco" style="border-color: #0000FF transparent transparent transparent; width: 80%; height: 80%; left: 10%;"></div>
+        <div class="arco" style="border-color: #4B0082 transparent transparent transparent; width: 75%; height: 75%; left: 12.5%;"></div>
+        <div class="arco" style="border-color: #9400D3 transparent transparent transparent; width: 70%; height: 70%; left: 15%;"></div>
+    </div>
+    
+    <!-- Nubes -->
+    <div class="nube nube1"></div>
+    <div class="nube nube2"></div>
+    <div class="nube nube3"></div>
+    
+    <!-- Pájaros -->
+    <div class="animal pajaro" style="top: 15%;">🦅</div>
+    <div class="animal pajaro" style="top: 35%; animation-delay: 7s;">🕊️</div>
+</div>
+
+<!-- MONTAÑAS -->
+<div class="montanas">
+    <div class="montana montana1"></div>
+    <div class="montana montana2"></div>
+    <div class="montana montana3"></div>
+</div>
+
+<!-- CAMPO -->
+<div class="campo" id="campo">
+    <!-- Los animales y flores se generarán con JavaScript -->
+</div>
+
+<!-- MENSAJE PRINCIPAL -->
+<div class="mensaje-principal">
+    <h1>Para ti, Cynthia 🌸</h1>
+    <p>
+        Hice este paisaje para ti porque sé cuánto amas a los animales.
+    </p>
+    <p>
+        Cada animal que ves aquí representa algo que amo de ti:
+    </p>
+    <p style="font-size: 1rem; color: #666; margin-top: 1.5rem;">
+        (Toca cada animal para descubrir su mensaje 💙)
+    </p>
+    <div class="firma">
+        Con todo mi amor,<br>
+        Tu Carlos 🦉💙
+    </div>
+</div>
+
+<script>
+    // Generar flores aleatorias
+    const campo = document.getElementById('campo');
+    const coloresFlores = ['#FF69B4', '#FF1493', '#FF6B9D', '#FFB6C1', '#FFC0CB', '#FF69B4', '#DA70D6'];
+    
+    for (let i = 0; i < 15; i++) {
+        const flor = document.createElement('div');
+        flor.className = 'flor';
+        flor.style.left = Math.random() * 90 + 5 + '%';
+        flor.style.animationDelay = Math.random() * 3 + 's';
+        
+        const petalosContainer = document.createElement('div');
+        petalosContainer.className = 'petalo-container';
+        
+        const color = coloresFlores[Math.floor(Math.random() * coloresFlores.length)];
+        
+        for (let j = 0; j < 4; j++) {
+            const petalo = document.createElement('div');
+            petalo.className = 'petalo';
+            petalo.style.background = color;
+            petalosContainer.appendChild(petalo);
+        }
+        
+        const centro = document.createElement('div');
+        centro.className = 'centro-flor';
+        petalosContainer.appendChild(centro);
+        
+        const tallo = document.createElement('div');
+        tallo.className = 'tallo';
+        
+        flor.appendChild(petalosContainer);
+        flor.appendChild(tallo);
+        campo.appendChild(flor);
+    }
+
+    // Animales con mensajes
+    const animales = [
+        { emoji: '🦋', mensaje: 'Tu ligereza y belleza me inspiran cada día', top: '10%', left: '15%', clase: 'mariposa' },
+        { emoji: '🐝', mensaje: 'Trabajadora y dulce, así eres tú', top: '5%', left: '60%', clase: 'mariposa' },
+        { emoji: '🐶', mensaje: 'Tu lealtad y amor puro', top: '40%', left: '20%' },
+        { emoji: '🐱', mensaje: 'Independiente pero cariñosa', top: '45%', left: '70%' },
+        { emoji: '🦊', mensaje: 'Inteligente y hermosa', top: '55%', left: '40%' },
+        { emoji: '🐰', mensaje: 'Ternura que me derrite', top: '50%', left: '80%' },
+        { emoji: '🦔', mensaje: 'Suave por dentro, protectora cuando necesitas', top: '60%', left: '15%' },
+        { emoji: '🐻', mensaje: 'Fuerte pero con corazón enorme', top: '65%', left: '55%' },
+        { emoji: '🐼', mensaje: 'Única y especial en todo el mundo', top: '70%', left: '30%' },
+        { emoji: '🦉', mensaje: 'Este soy yo, observándote y queriéndote siempre', top: '35%', left: '85%' },
+        { emoji: '🐋', mensaje: 'Tu vastedad y profundidad que tanto amo', top: '30%', left: '50%' },
+        { emoji: '🐘', mensaje: 'Tu memoria del corazón que nunca olvida lo importante', top: '75%', left: '65%' }
+    ];
+
+    animales.forEach((animal, index) => {
+        const animalDiv = document.createElement('div');
+        animalDiv.className = 'animal' + (animal.clase ? ' ' + animal.clase : '');
+        animalDiv.style.top = animal.top;
+        animalDiv.style.left = animal.left;
+        animalDiv.innerHTML = animal.emoji;
+        
+        const mensajeDiv = document.createElement('div');
+        mensajeDiv.className = 'animal-mensaje';
+        mensajeDiv.textContent = animal.mensaje;
+        mensajeDiv.style.top = 'calc(' + animal.top + ' + 60px)';
+        mensajeDiv.style.left = animal.left;
+        
+        animalDiv.addEventListener('click', function(e) {
+            e.stopPropagation();
+            
+            // Ocultar todos los mensajes
+            document.querySelectorAll('.animal-mensaje').forEach(m => {
+                m.classList.remove('visible');
+            });
+            
+            // Mostrar este mensaje
+            mensajeDiv.classList.add('visible');
+            
+            // Animar el animal
+            animalDiv.style.transform = 'scale(1.5)';
+            setTimeout(() => {
+                animalDiv.style.transform = 'scale(1)';
+            }, 300);
+        });
+        
+        campo.appendChild(animalDiv);
+        campo.appendChild(mensajeDiv);
+    });
+
+    // Cerrar mensajes al tocar el campo
+    campo.addEventListener('click', function() {
+        document.querySelectorAll('.animal-mensaje').forEach(m => {
+            m.classList.remove('visible');
+        });
+    });
+
+    // Generar corazones flotantes
+    for (let i = 0; i < 5; i++) {
+        const corazon = document.createElement('div');
+        corazon.className = 'corazon';
+        corazon.textContent = '💙';
+        corazon.style.top = Math.random() * 80 + 10 + '%';
+        corazon.style.left = Math.random() * 90 + 5 + '%';
+        corazon.style.animationDelay = Math.random() * 6 + 's';
+        campo.appendChild(corazon);
+    }
+</script>
+```
+
+</body>
+</html>
