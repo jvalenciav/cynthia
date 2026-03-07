@@ -236,24 +236,71 @@
         transform: scale(1.3);
     }
 
-    .animal-mensaje {
-        position: absolute;
-        background: rgba(255, 255, 255, 0.95);
-        padding: 1rem;
-        border-radius: 15px;
-        font-size: 0.9rem;
-        color: #333;
-        max-width: 200px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-        text-align: center;
-        font-family: 'Georgia', serif;
+    /* MODAL DE MENSAJE */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        backdrop-filter: blur(5px);
     }
 
-    .animal-mensaje.visible {
-        opacity: 1;
+    .modal-overlay.visible {
+        display: flex;
+    }
+
+    .animal-mensaje {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        max-width: 85%;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        text-align: center;
+        font-family: 'Georgia', serif;
+        position: relative;
+        transform: scale(0.8);
+        transition: transform 0.3s ease;
+    }
+
+    .modal-overlay.visible .animal-mensaje {
+        transform: scale(1);
+    }
+
+    .animal-emoji-grande {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .mensaje-texto {
+        font-size: 1.2rem;
+        color: #333;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    .btn-cerrar {
+        background: #74b9ff;
+        color: white;
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-family: 'Georgia', serif;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .btn-cerrar:active {
+        transform: scale(0.95);
+        background: #5a9fd4;
     }
 
     /* Animaciones de animales */
@@ -426,6 +473,15 @@
     </div>
 </div>
 
+<!-- MODAL PARA MENSAJES -->
+<div class="modal-overlay" id="modal">
+    <div class="animal-mensaje">
+        <span class="animal-emoji-grande" id="modal-emoji"></span>
+        <p class="mensaje-texto" id="modal-texto"></p>
+        <button class="btn-cerrar" onclick="cerrarModal()">Cerrar</button>
+    </div>
+</div>
+
 <script>
     // Generar flores aleatorias
     const campo = document.getElementById('campo');
@@ -473,9 +529,23 @@
         { emoji: '🐻', mensaje: 'Fuerte pero con corazón enorme', top: '65%', left: '55%' },
         { emoji: '🐼', mensaje: 'Única y especial en todo el mundo', top: '70%', left: '30%' },
         { emoji: '🦉', mensaje: 'Este soy yo, observándote y queriéndote siempre', top: '35%', left: '85%' },
-        { emoji: '🐋', mensaje: 'Tu vastedad y profundidad que tanto amo', top: '30%', left: '50%' },
+        { emoji: '🐋', mensaje: 'Tu vastedad y profundidad que tanto quiero', top: '30%', left: '50%' },
         { emoji: '🐘', mensaje: 'Tu memoria del corazón que nunca olvida lo importante', top: '75%', left: '65%' }
     ];
+
+    const modal = document.getElementById('modal');
+    const modalEmoji = document.getElementById('modal-emoji');
+    const modalTexto = document.getElementById('modal-texto');
+
+    function cerrarModal() {
+        modal.classList.remove('visible');
+    }
+
+    function mostrarMensaje(emoji, mensaje) {
+        modalEmoji.textContent = emoji;
+        modalTexto.textContent = mensaje;
+        modal.classList.add('visible');
+    }
 
     animales.forEach((animal, index) => {
         const animalDiv = document.createElement('div');
@@ -484,22 +554,9 @@
         animalDiv.style.left = animal.left;
         animalDiv.innerHTML = animal.emoji;
         
-        const mensajeDiv = document.createElement('div');
-        mensajeDiv.className = 'animal-mensaje';
-        mensajeDiv.textContent = animal.mensaje;
-        mensajeDiv.style.top = 'calc(' + animal.top + ' + 60px)';
-        mensajeDiv.style.left = animal.left;
-        
         animalDiv.addEventListener('click', function(e) {
             e.stopPropagation();
-            
-            // Ocultar todos los mensajes
-            document.querySelectorAll('.animal-mensaje').forEach(m => {
-                m.classList.remove('visible');
-            });
-            
-            // Mostrar este mensaje
-            mensajeDiv.classList.add('visible');
+            mostrarMensaje(animal.emoji, animal.mensaje);
             
             // Animar el animal
             animalDiv.style.transform = 'scale(1.5)';
@@ -509,14 +566,13 @@
         });
         
         campo.appendChild(animalDiv);
-        campo.appendChild(mensajeDiv);
     });
 
-    // Cerrar mensajes al tocar el campo
-    campo.addEventListener('click', function() {
-        document.querySelectorAll('.animal-mensaje').forEach(m => {
-            m.classList.remove('visible');
-        });
+    // Cerrar modal al tocar el fondo oscuro
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            cerrarModal();
+        }
     });
 
     // Generar corazones flotantes
