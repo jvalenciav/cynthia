@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Inefable - Cynthia 💙✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Crimson Text', 'Georgia', serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 0;
+            color: #e8e8e8;
+            line-height: 1.8;
+        }
+
+        /* SVG Background */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.15;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding: 0 30px;
+        }
+
+        /* HERO MINIMALISTA */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: breathe 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 8vw;
+            font-weight: 300;
+            letter-spacing: 8px;
+            color: #d4af37;
+            margin-bottom: 30px;
+            animation: fadeInDown 1.5s ease;
+            text-transform: uppercase;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-emoji {
+            font-size: 5rem;
+            margin: 30px 0;
+            animation: fadeInUp 1.5s ease 0.3s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.6rem;
+            color: #87ceeb;
+            font-weight: 300;
+            margin-top: 40px;
+            animation: fadeInUp 1.5s ease 0.6s both;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #d4af37;
+            opacity: 0.7;
+            animation: float 3s ease-in-out infinite;
+            font-size: 1.2rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(15px); }
+        }
+
+        /* SECCIONES POÉTICAS */
+        .poetry-section {
+            margin: 150px 0;
+            position: relative;
+            padding: 80px 0;
+        }
+
+        .poetry-section:first-of-type {
+            margin-top: 200px;
+        }
+
+        .section-number {
+            font-size: 10rem;
+            color: rgba(212, 175, 55, 0.08);
+            position: absolute;
+            top: -50px;
+            left: -20px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .poetry-title {
+            font-size: 3.5rem;
+            color: #d4af37;
+            font-weight: 300;
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .poetry-divider {
+            width: 120px;
+            height: 1px;
+            background: linear-gradient(90deg, #d4af37, transparent);
+            margin-bottom: 40px;
+        }
+
+        .poetry-content {
+            font-size: 1.5rem;
+            line-height: 2;
+            color: #e8e8e8;
+            max-width: 700px;
+            font-weight: 300;
+        }
+
+        .poetry-highlight {
+            color: #87ceeb;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .poetry-break {
+            height: 60px;
+        }
+
+        /* DEFINITION POÉTICA */
+        .definition-poetic {
+            margin: 150px 0;
+            padding: 100px 60px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), rgba(135, 206, 235, 0.05));
+            border-left: 3px solid #d4af37;
+            position: relative;
+        }
+
+        .definition-poetic::before {
+            content: '"';
+            font-size: 8rem;
+            color: rgba(212, 175, 55, 0.12);
+            position: absolute;
+            top: -30px;
+            left: 30px;
+            line-height: 1;
+        }
+
+        .definition-word {
+            font-size: 2.5rem;
+            color: #87ceeb;
+            margin-bottom: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .definition-text {
+            font-size: 1.4rem;
+            color: #d0d0d0;
+            line-height: 2;
+            font-weight: 300;
+        }
+
+        /* LISTA POÉTICA */
+        .poetic-list {
+            margin: 150px 0;
+            padding: 0;
+        }
+
+        .list-item {
+            margin: 60px 0;
+            font-size: 1.5rem;
+            color: #e8e8e8;
+            line-height: 1.9;
+            position: relative;
+            padding-left: 80px;
+        }
+
+        .list-item::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: #d4af37;
+            font-size: 1.3rem;
+        }
+
+        .list-item-highlight {
+            color: #87ceeb;
+            font-style: italic;
+        }
+
+        /* POEMA CENTRAL */
+        .poem-central {
+            margin: 200px 0;
+            text-align: center;
+            padding: 100px 40px;
+            position: relative;
+        }
+
+        .poem-central::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(180deg, transparent, #d4af37);
+            transform: translateX(-50%);
+        }
+
+        .poem-central::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 1px;
+            height: 80px;
+            background: linear-gradient(180deg, #d4af37, transparent);
+            transform: translateX(-50%);
+        }
+
+        .poem-lines {
+            font-size: 1.6rem;
+            color: #d0d0d0;
+            line-height: 2.4;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .poem-line {
+            margin: 20px 0;
+            opacity: 0;
+            animation: fadeInPoem 0.8s ease forwards;
+        }
+
+        @keyframes fadeInPoem {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .poem-line:nth-child(1) { animation-delay: 0.1s; }
+        .poem-line:nth-child(2) { animation-delay: 0.2s; }
+        .poem-line:nth-child(3) { animation-delay: 0.3s; }
+        .poem-line:nth-child(4) { animation-delay: 0.4s; }
+        .poem-line:nth-child(5) { animation-delay: 0.6s; }
+        .poem-line:nth-child(6) { animation-delay: 0.7s; }
+        .poem-line:nth-child(7) { animation-delay: 0.8s; }
+        .poem-line:nth-child(8) { animation-delay: 0.9s; }
+        .poem-line:nth-child(9) { animation-delay: 1s; }
+
+        /* GRID VISUAL POÉTICO */
+        .visual-grid {
+            margin: 200px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .grid-item {
+            text-align: center;
+        }
+
+        .grid-emoji {
+            font-size: 4rem;
+            margin-bottom: 30px;
+        }
+
+        .grid-text {
+            font-size: 1.4rem;
+            color: #c0c0c0;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        /* CIERRE POÉTICO */
+        .closing-poetic {
+            margin: 250px 0 100px 0;
+            padding: 150px 60px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(212, 175, 55, 0.08), rgba(135, 206, 235, 0.08));
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+        }
+
+        .closing-poetic h2 {
+            font-size: 3rem;
+            color: #d4af37;
+            font-weight: 300;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .closing-text {
+            font-size: 1.5rem;
+            color: #e8e8e8;
+            line-height: 2.2;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .closing-emoji {
+            font-size: 5rem;
+            margin: 60px 0;
+            animation: heartPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes heartPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 1; }
+        }
+
+        /* FIRMA */
+        .signature-poetic {
+            text-align: center;
+            padding: 100px 40px;
+            margin-bottom: 50px;
+        }
+
+        .signature-poetic p {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin: 15px 0;
+            font-weight: 300;
+        }
+
+        .signature-name {
+            color: #d4af37;
+            font-size: 1.5rem;
+            margin-top: 30px;
+            letter-spacing: 2px;
+        }
+
+        .signature-note {
+            color: #87ceeb;
+            font-size: 1.1rem;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+                letter-spacing: 4px;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .poetry-title {
+                font-size: 2.5rem;
+            }
+
+            .poetry-content {
+                font-size: 1.2rem;
+            }
+
+            .poetry-section {
+                margin: 100px 0;
+                padding: 60px 0;
+            }
+
+            .definition-poetic {
+                padding: 60px 40px;
+            }
+
+            .poem-lines {
+                font-size: 1.3rem;
+            }
+
+            .visual-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+
+            .closing-poetic h2 {
+                font-size: 2.2rem;
+                margin-bottom: 30px;
+            }
+
+            .closing-poetic {
+                padding: 80px 40px;
+            }
+
+            .definition-poetic::before {
+                font-size: 4rem;
+                top: -20px;
+                left: 20px;
+            }
+        }
+
+        /* ANIMACIONES SUAVES */
+        .fade-in {
+            animation: fadeInSection 1s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeInSection {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Floating Shapes -->
+    <div class="floating-shapes">
+        <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="blur">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="3" />
+                </filter>
+            </defs>
+            
+            <!-- Formas abstractas flotantes -->
+            <circle cx="200" cy="300" r="80" fill="#d4af37" filter="url(#blur)" opacity="0.08" />
+            <circle cx="800" cy="600" r="120" fill="#87ceeb" filter="url(#blur)" opacity="0.08" />
+            <path d="M 100 500 Q 200 400 300 500 T 500 500" stroke="#d4af37" stroke-width="2" fill="none" filter="url(#blur)" opacity="0.08" />
+            <circle cx="500" cy="200" r="60" fill="#87ceeb" filter="url(#blur)" opacity="0.06" />
+        </svg>
+    </div>
+
+    <div class="container">
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>INEFABLE</h1>
+                <div class="hero-emoji">✨💙</div>
+                <p class="hero-subtitle">
+                    El por qué no puedo explicarte<br>
+                    con palabras
+                </p>
+            </div>
+            <div class="scroll-hint">↓ Desciende</div>
+        </section>
+
+        <!-- SECCIÓN 1: DEFINICIÓN POÉTICA -->
+        <section class="poetry-section">
+            <div class="section-number">I</div>
+            <div class="poetry-divider"></div>
+            
+            <div class="definition-poetic">
+                <div class="definition-word">Inefable</div>
+                <div class="definition-text">
+                    <strong>Que no se puede explicar o expresar con palabras.</strong>
+                    <br><br>
+                    Lo que <span class="poetry-highlight">trasciende</span> el lenguaje.
+                    <br>
+                    Lo indescriptible.
+                    <br>
+                    Lo que existe <span class="poetry-highlight">más allá</span> de los sonidos.
+                </div>
+            </div>
+        </section>
+
+        <!-- LA PARADOJA POÉTICA -->
+        <section class="poetry-section">
+            <div class="section-number">II</div>
+            <div class="poetry-title">La Paradoja</div>
+            <div class="poetry-divider"></div>
+            
+            <div class="poem-central">
+                <div class="poetry-content">
+                    Intento explicarte por qué eres inefable,
+                    <br><br>
+                    pero la razón por la cual fracaso
+                    <br>
+                    es precisamente la razón por la cual eres perfecta.
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN 2: LO QUE SIENTO -->
+        <section class="poetry-section">
+            <div class="poetry-title">Lo Que Siento</div>
+            <div class="poetry-divider"></div>
+            
+            <div class="poetry-content">
+                Hay un sentimiento cuando estoy contigo que no tiene nombre.
+                <br><br>
+                No es "felicidad" exactamente.
+                <br>
+                No es "amor" solamente.
+                <br>
+                No es "paz" completamente.
+            </div>
+
+            <div class="poetry-break"></div>
+
+            <div class="poetry-content">
+                Es todo eso simultáneamente,
+                <br>
+                pero es también algo <span class="poetry-highlight">más grande</span>.
+                <br><br>
+                Algo que existe en un lugar
+                <br>
+                que las palabras nunca alcanzaron.
+            </div>
+        </section>
+
+        <!-- LISTA POÉTICA -->
+        <section class="poetic-list">
+            <div class="poetry-title">Tu Impacto Sin Explicación</div>
+            <div class="poetry-divider"></div>
+
+            <div class="list-item">
+                Cuando estás conmigo,
+                <br>
+                mi <span class="list-item-highlight">ansiedad desaparece</span>
+            </div>
+
+            <div class="list-item">
+                Mi <span class="list-item-highlight">caos se ordena</span>
+                <br>
+                sin que yo sepa cómo
+            </div>
+
+            <div class="list-item">
+                Mi mundo tiene <span class="list-item-highlight">sentido</span>
+                <br>
+                simplemente porque estás
+            </div>
+
+            <div class="list-item">
+                Pero no sé <span class="list-item-highlight">cómo</span> lo haces
+            </div>
+
+            <div class="list-item">
+                No es una técnica.
+                <br>
+                No es una fórmula.
+                <br>
+                No es lógica.
+            </div>
+
+            <div class="list-item">
+                Es solo...
+                <br>
+                <span class="list-item-highlight">tú</span>
+            </div>
+        </section>
+
+        <!-- POEMA CENTRAL LARGO -->
+        <section class="poem-central">
+            <div class="poetry-title">En Poesía</div>
+            <div class="poetry-divider" style="margin: 40px auto;"></div>
+
+            <div class="poem-lines">
+                <div class="poem-line">Eres las palabras que me faltan,</div>
+                <div class="poem-line">el silencio que habla por mí,</div>
+                <div class="poem-line">la canción sin melodía,</div>
+                <div class="poem-line">la luz sin nombre.</div>
+                <div class="poem-line"></div>
+                <div class="poem-line">Eres lo que existe fuera del lenguaje,</div>
+                <div class="poem-line">en ese espacio donde los sentimientos</div>
+                <div class="poem-line">son más reales que cualquier palabra</div>
+                <div class="poem-line">que pudiera escribir.</div>
+            </div>
+        </section>
+
+        <!-- LO INEFABLE DE TI -->
+        <section class="visual-grid">
+            <div class="grid-item">
+                <div class="grid-emoji">😊</div>
+                <div class="grid-text">Tu sonrisa<br>que me desmorona</div>
+            </div>
+            <div class="grid-item">
+                <div class="grid-emoji">🎵</div>
+                <div class="grid-text">Tu voz<br>que me hipnotiza</div>
+            </div>
+            
+            <div class="grid-item">
+                <div class="grid-emoji">🕊️</div>
+                <div class="grid-text">Tu presencia<br>que me calma</div>
+            </div>
+            <div class="grid-item">
+                <div class="grid-emoji">🌊</div>
+                <div class="grid-text">Tu profundidad<br>que me ahoga</div>
+            </div>
+
+            <div class="grid-item">
+                <div class="grid-emoji">🌟</div>
+                <div class="grid-text">Tu energía<br>que me transforma</div>
+            </div>
+            <div class="grid-item">
+                <div class="grid-emoji">♾️</div>
+                <div class="grid-text">Tu infinito<br>que me completa</div>
+            </div>
+        </section>
+
+        <!-- CONCLUSIÓN POÉTICA -->
+        <section class="closing-poetic">
+            <h2>La Verdad Simple</h2>
+            
+            <div class="closing-emoji">💙</div>
+            
+            <div class="closing-text">
+                No puedo explicarte completamente.
+                <br><br>
+                No tengo palabras lo suficientemente profundas.
+                <br><br>
+                No existe lenguaje que pueda contener
+                <br>
+                todo lo que eres para mí.
+            </div>
+
+            <div class="poetry-break"></div>
+
+            <div class="closing-text" style="font-size: 1.7rem; color: #ec4899; margin-top: 40px;">
+                Eres <span class="poetry-highlight">inefable</span>.
+            </div>
+
+            <div class="poetry-break"></div>
+
+            <div class="closing-text">
+                Y eso significa que eres más grande que las palabras.
+                <br>
+                Más profunda que el lenguaje.
+                <br>
+                Más real que cualquier descripción.
+            </div>
+        </section>
+
+        <!-- FIRMA -->
+        <div class="signature-poetic">
+            <p>Porque las palabras no son suficientes,</p>
+            <p class="signature-name">Tu Carlos 🦉💙</p>
+            <p class="signature-note">Para Cynthia, lo Inefable</p>
+        </div>
+    </div>
+
+    <script>
+        // Intersection Observer para fade-in
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.poetry-section').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll
+        document.querySelector('.scroll-hint').addEventListener('click', () => {
+            document.querySelector('.poetry-section').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
