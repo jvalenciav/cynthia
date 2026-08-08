@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#050814" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Cynthia — Nuestro primer mes 💙</title>
+  <meta name="description" content="Una pequeña parte de todo lo que todavía quiero vivir contigo." />
+  <link rel="stylesheet" href="styleaniversario.css" />
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <section id="intro" class="intro" aria-label="Inicio">
+    <div class="intro-copy">
+      <p class="eyebrow">15 · 08 · 2026</p>
+      <h1>Cynthia…</h1>
+      <p class="intro-line">antes de entrar a nuestro primer mes, quiero que veas algo.</p>
+      <button id="startBtn" class="primary-btn" type="button">
+        <span>Entrar a nuestro universo</span>
+        <span class="heart">💙</span>
+      </button>
+      <p class="tiny">Toca una vez. Lo demás déjamelo a mí.</p>
+    </div>
+  </section>
+
+  <section id="videoScene" class="video-scene hidden" aria-label="Video de nuestro primer mes">
+    <video id="loveVideo" playsinline preload="metadata">
+      <source src="mes1.mp4" type="video/mp4" />
+      Tu navegador no puede reproducir este video.
+    </video>
+    <div id="videoOverlay" class="video-overlay hidden">
+      <p>Y pensar que esto…</p>
+      <h2>apenas es el capítulo 1.</h2>
+    </div>
+    <button id="skipVideo" class="skip-btn" type="button">Saltar video</button>
+  </section>
+
+  <main id="story" class="story hidden">
+    <section class="hero-section panel reveal">
+      <div class="hero-glow"></div>
+      <p class="eyebrow">CAPÍTULO I</p>
+      <h2 class="display">Mi Inefable <span>✨💙</span></h2>
+      <p class="definition">
+        <strong>inefable</strong> — algo tan especial que las palabras se quedan pequeñas cuando intentas explicarlo.
+      </p>
+      <p class="lead">Ahora entiendo por qué ese nombre siempre te quedó tan bien.</p>
+      <div class="scroll-hint">desliza ↓</div>
+    </section>
+
+    <section class="panel reveal prose-section">
+      <p class="eyebrow">ANTES DE NOSOTROS</p>
+      <div class="prose max-text">
+        <p>Hubo un tiempo en el que simplemente éramos tú y yo, hablando, jugando, riéndonos y estando presentes sin saber exactamente hacia dónde nos llevaba todo eso.</p>
+        <p>Y aun así, algo ya estaba ahí.</p>
+        <p>En las bromas. En la confianza. En el “¿ya comiste?”. En preocuparnos. En extrañarnos. En las madrugadas. En esas pequeñas cosas que terminaron construyendo algo enorme.</p>
+      </div>
+    </section>
+
+    <section class="panel reveal quote-section">
+      <p class="eyebrow">14 · 07 · 2026</p>
+      <blockquote>
+        “Estoy con mi vida, mi cielo…<br />ella merece toda mi atención.”
+      </blockquote>
+      <p class="quote-note">Sí. Hablaba de ti.</p>
+    </section>
+
+    <section class="panel calendar-section reveal">
+      <div class="calendar-card">
+        <div class="calendar-top">JULIO 2026</div>
+        <div class="calendar-grid" aria-label="Calendario de julio de 2026">
+          <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+          <i></i><i></i><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+          <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+          <span>13</span><span>14</span><span class="chosen">15<b>💙</b></span><span>16</span><span>17</span><span>18</span><span>19</span>
+          <span>20</span><span>21</span><span>22</span><span>23</span><span>24</span><span>25</span><span>26</span>
+          <span>27</span><span>28</span><span>29</span><span>30</span><span>31</span>
+        </div>
+      </div>
+      <div class="calendar-copy">
+        <p class="eyebrow">Y ENTONCES LLEGÓ EL 15</p>
+        <h2>El día en que “tú y yo” se convirtió en <em>nosotros</em>.</h2>
+        <p>No fue el inicio de lo que sentíamos. Fue el día en que decidimos ponerle nombre a algo que llevaba tiempo encontrándonos.</p>
+      </div>
+    </section>
+
+    <section class="panel reveal">
+      <p class="eyebrow centered">LO QUE MÁS AMO DE TI</p>
+      <h2 class="section-title">No son “razones”. Son pedacitos de Cynthia.</h2>
+      <div class="cards" id="cards">
+        <button class="love-card" type="button">
+          <span class="card-icon">🐾</span>
+          <span class="card-title">Tu corazón</span>
+          <span class="card-back">La manera en la que amas y cuidas a los animales dice muchísimo de la mujer que eres. Tu ternura no se presume: se nota.</span>
+        </button>
+        <button class="love-card" type="button">
+          <span class="card-icon">😂</span>
+          <span class="card-title">Tu risa</span>
+          <span class="card-back">Amo nuestra forma de reírnos hasta por las tonterías más pequeñas. Contigo hasta un día cualquiera tiene historia.</span>
+        </button>
+        <button class="love-card" type="button">
+          <span class="card-icon">🫂</span>
+          <span class="card-title">Tu manera de querer</span>
+          <span class="card-back">Estás en los detalles: preguntar si comí, si llegué bien, desearme éxito, cuidarme incluso a la distancia. Eso también es amor.</span>
+        </button>
+        <button class="love-card" type="button">
+          <span class="card-icon">🌙</span>
+          <span class="card-title">Nuestra calma</span>
+          <span class="card-back">Puedo hablar contigo, jugar contigo, dormir contigo, extrañarte y sentir que incluso el silencio puede ser compañía.</span>
+        </button>
+        <button class="love-card" type="button">
+          <span class="card-icon">✨</span>
+          <span class="card-title">Tu esencia</span>
+          <span class="card-back">No cambiaría esa mezcla tuya de dulzura, carácter, ocurrencias, sensibilidad y fuerza. Es exactamente eso lo que te hace tú.</span>
+        </button>
+        <button class="love-card final-card" type="button">
+          <span class="card-icon">♾️</span>
+          <span class="card-title">Lo que falta</span>
+          <span class="card-back">Este es apenas nuestro primer mes. Lo más hermoso es saber que todavía nos quedan miles de versiones de nosotros por conocer.</span>
+        </button>
+      </div>
+      <p class="tap-hint">Toca cada tarjeta 💙</p>
+    </section>
+
+    <section class="panel universe-section reveal">
+      <div class="universe-copy">
+        <p class="eyebrow">NUESTRO PEQUEÑO UNIVERSO</p>
+        <h2>Hay cosas diminutas que contigo se sienten inmensas.</h2>
+        <p>Toca las estrellas.</p>
+      </div>
+      <div class="constellation" id="constellation">
+        <button class="memory-star s1" data-memory="Una madrugada hablando hasta que el sueño nos ganó.">✦</button>
+        <button class="memory-star s2" data-memory="Un ‘avísame cuando llegues’ que en realidad significa: me importas.">✧</button>
+        <button class="memory-star s3" data-memory="Una partida que terminó siendo más risa que juego.">✦</button>
+        <button class="memory-star s4" data-memory="Un ‘come algo, por favor’ porque cuidarnos también es querernos.">✧</button>
+        <button class="memory-star s5" data-memory="Ese momento de dormir juntos y sentir que por fin la distancia dejó de existir.">✦</button>
+        <button class="memory-star s6" data-memory="Todos esos ‘te quiero mucho mucho mucho’ que nunca quiero dejar de escuchar.">✧</button>
+        <div class="memory-pop" id="memoryPop">Toca una estrella ✨</div>
+      </div>
+    </section>
+
+    <section class="panel reveal quote-section soft">
+      <p class="eyebrow">18 · 07 · 2026</p>
+      <blockquote>“Volvería a repetir todo 💙”</blockquote>
+      <p class="quote-note">Yo también. Una y mil veces.</p>
+    </section>
+
+    <section class="panel reveal days-section">
+      <p class="eyebrow centered">UN MES</p>
+      <div class="counter-wrap">
+        <div><strong id="daysTogether">31</strong><span>días</span></div>
+        <div><strong>1</strong><span>capítulo</span></div>
+        <div><strong>∞</strong><span>por vivir</span></div>
+      </div>
+      <p class="days-copy">No quiero contar el tiempo para ver cuánto llevamos.<br />Quiero contarlo para recordar cuánto hemos construido.</p>
+    </section>
+
+    <section class="panel reveal letter-section" id="letterSection">
+      <div class="letter-shell">
+        <div class="letter-seal">JC<br /><span>♡</span><br />C</div>
+        <p class="eyebrow">PARA CYNTHIA</p>
+        <h2>Una última cosa…</h2>
+        <button id="openLetter" class="secondary-btn" type="button">Abrir mi carta</button>
+        <div id="letter" class="letter hidden-letter">
+          <p>Mi cielo,</p>
+          <p>Hoy cumplimos nuestro primer mes y, aunque decir “un mes” suene pequeño, contigo se siente lleno de recuerdos, emociones, risas, aprendizajes y momentos que quiero guardar por muchísimo tiempo.</p>
+          <p>Me gusta pensar que no llegaste a mi vida para ocupar un espacio; llegaste para convertirte en uno. En uno de esos lugares donde quiero estar, al que quiero cuidar y al que siempre quiero volver.</p>
+          <p>Admiro tu corazón, tu forma de querer, la sensibilidad que tienes con los animales, con tu familia, conmigo. Admiro que detrás de tus bromas y tu carácter exista una mujer tan humana, tan intensa para amar y tan hermosa por dentro.</p>
+          <p>Gracias por dejarme conocerte en todas tus versiones: la que se ríe, la que se enoja, la que hace berrinche, la que cuida, la que sueña, la que tiene miedo, la que confía, la que ama.</p>
+          <p>No quiero prometerte una historia perfecta. Quiero algo mejor: una historia real. Una en la que sigamos hablándonos, aprendiendo, eligiéndonos, corrigiendo lo necesario y celebrando todo lo bonito.</p>
+          <p>Quiero seguir estando presente. No solamente respondiendo mensajes, sino preguntándome cómo estás de verdad, preocupándome por tu día, poniendo atención a lo que amas y construyendo contigo.</p>
+          <p>Y si algún día vuelves a preguntarte qué tienes de especial, quiero que recuerdes esto: no eres especial porque seas “algo nuevo”. Eres especial porque eres tú. Porque tu forma de existir, de sentir y de amar no la reemplaza nadie.</p>
+          <p>Este detalle no intenta resumir todo lo que siento por ti. Sería imposible. Solo quería dejarte un pequeño lugar al que puedas volver y recordar que, en este preciso momento de mi vida, me siento profundamente afortunado de poder decir:</p>
+          <p class="letter-emphasis">qué orgullo ser tu novio.</p>
+          <p>Feliz primer mes, mi amor.</p>
+          <p class="signature">— Carlos 💙</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel final-section reveal">
+      <div class="final-inner">
+        <p class="eyebrow">15 · 08 · 2026</p>
+        <h2>Feliz primer mes,<br /><span>Cynthia.</span></h2>
+        <p>Si esto fuera una historia, no pondría “fin”.</p>
+        <p class="chapter">Capítulo 1 de ∞</p>
+        <button id="lastSurprise" class="ghost-btn" type="button">Hay una última sorpresa</button>
+        <div id="finalSecret" class="final-secret" aria-hidden="true">
+          <p>Te elegiría otra vez.</p>
+          <p>En este momento.</p>
+          <p>En esta vida.</p>
+          <p>Y en todas las que nos falten. 💙</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="scriptaniversario.js"></script>
+</body>
+</html>
