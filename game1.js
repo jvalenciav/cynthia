@@ -233,7 +233,7 @@ const levels = [
       </div>
       <p style="color:var(--muted)">Une las cinco letras obtenidas.</p>
       <input id="answer" type="text" autocomplete="off" placeholder="Cinco letras">
-      <div class="action-row"><button class="primary" onclick="checkText(15,'rasoa')">Comprobar</button></div>
+      <div class="action-row"><button class="primary" onclick="checkText(15,'rmsoo')">Comprobar</button></div>
       <div id="feedback" class="feedback"></div>
     </div>`},
   reward:"No todas las respuestas forman una frase bonita. Algunas solo prueban que supiste seguir una cadena de reglas."
