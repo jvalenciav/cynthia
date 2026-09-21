@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#071225" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Cynthia's Universe — 20 niveles ✨</title>
+  <script defer src="style1.js"></script>
+</head>
+<body>
+  <canvas id="stars"></canvas>
+  <div class="aurora"></div>
+
+  <div id="intro" class="overlay">
+    <div class="glass intro-card">
+      <div class="tiny">21 · 09 · 2026</div>
+      <div class="moon"></div>
+      <h1>Cynthia's Universe</h1>
+      <p>
+        Pensaste que eran diez estrellas.<br>
+        Pero nuestro universo tenía más cosas escondidas.
+      </p>
+      <p class="intro-sub">
+        Los primeros 10 niveles eran solo la entrada.<br>
+        Del 11 al 20, las cosas se ponen bastante más difíciles.
+      </p>
+      <button class="primary" id="beginBtn">Entrar al universo ✨</button>
+    </div>
+  </div>
+
+  <div id="unlockOverlay" class="overlay hidden">
+    <div class="glass unlock-card">
+      <div class="unlock-star">✦</div>
+      <div class="tiny">NIVEL SUPERADO</div>
+      <h2 id="unlockTitle">Una estrella más</h2>
+      <p id="unlockReward"></p>
+      <button class="primary" id="nextBtn">Continuar</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <main class="app-shell">
+    <header class="topbar glass">
+      <div>
+        <div class="tiny">PARA CYNTHIA</div>
+        <div class="brand">Nuestro universo</div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-text">
+          <span id="progressText">0 / 20</span> estrellas
+        </div>
+        <div class="progress-track">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+      </div>
+
+      <button class="ghost small" id="resetBtn">Reiniciar</button>
+    </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">MI HEROÍNA · MI COSMOS · MI AMOR BONITO</div>
+        <h2>Veinte estrellas.<br>Veinte retos.<br>Una historia.</h2>
+        <p>
+          Los primeros diez niveles te enseñan a moverte por este universo.
+          Los siguientes diez requieren observar patrones, combinar pistas,
+          descifrar códigos y recordar lo que ya aprendiste.
+        </p>
+
+        <div class="legend">
+          <span><i class="dot easy"></i>Niveles 1–5</span>
+          <span><i class="dot mid"></i>Niveles 6–10</span>
+          <span><i class="dot hard"></i>Niveles 11–15</span>
+          <span><i class="dot extreme"></i>Niveles 16–20</span>
+        </div>
+      </div>
+
+      <div id="map" class="constellation-map"></div>
+    </section>
+
+    <section id="gameArea" class="game-area">
+      <div class="glass level-card">
+        <div class="level-head">
+          <div>
+            <div class="tiny" id="levelNumber">NIVEL 1</div>
+            <h3 id="levelTitle">La primera llave</h3>
+          </div>
+          <div id="difficulty" class="difficulty">✦☆☆☆☆</div>
+        </div>
+
+        <div id="levelBody"></div>
+
+        <div class="hint-row">
+          <button id="hintBtn" class="ghost">Pista</button>
+          <span id="hintText" class="hint-text"></span>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Hecho para Cynthia ✨ · Progreso guardado automáticamente en este dispositivo.
+    </footer>
+  </main>
+
+  <script defer src="game1.js"></script>
+</body>
+</html>
