@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071225">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Cynthia's Universe — Niveles 21–40</title>
+  <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+<canvas id="stars"></canvas>
+<div class="aurora"></div>
+
+<div id="intro" class="overlay">
+  <div class="glass intro-card">
+    <div class="tiny">SEGUNDA EXPANSIÓN</div>
+    <div class="moon"></div>
+    <h1>Niveles 21–40</h1>
+    <p>
+      Esta parte del universo ya no se resuelve solo con intuición.
+      Aquí hay códigos, lógica, memoria, patrones y acertijos de varias capas.
+    </p>
+    <button class="primary" id="beginBtn">Entrar ✨</button>
+  </div>
+</div>
+
+<div id="unlockOverlay" class="overlay hidden">
+  <div class="glass unlock-card">
+    <div class="unlock-star">✦</div>
+    <div class="tiny">NIVEL SUPERADO</div>
+    <h2 id="unlockTitle">Estrella desbloqueada</h2>
+    <p id="unlockReward"></p>
+    <button class="primary" id="nextBtn">Continuar</button>
+  </div>
+</div>
+
+<main class="app-shell">
+  <header class="topbar glass">
+    <div>
+      <div class="tiny">CYNTHIA'S UNIVERSE</div>
+      <div class="brand">Niveles 21–40</div>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-text"><span id="progressText">0 / 20</span> estrellas</div>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+    </div>
+    <button class="ghost small" id="resetBtn">Reiniciar</button>
+  </header>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <div class="eyebrow">MÁS DIFÍCIL · MÁS ACERTIJOS · MÁS NOSOTROS</div>
+      <h2>La segunda constelación</h2>
+      <p>
+        Del nivel 21 al 40 la dificultad sube poco a poco.
+        Si un reto se pone pesado, usa la pista: ahora las ayudas explican también
+        el método para que no se vuelva frustrante.
+      </p>
+    </div>
+    <div id="map" class="constellation-map"></div>
+  </section>
+
+  <section id="gameArea" class="game-area">
+    <div class="glass level-card">
+      <div class="level-head">
+        <div>
+          <div class="tiny" id="levelNumber">NIVEL 21</div>
+          <h3 id="levelTitle">Acertijo</h3>
+        </div>
+        <div id="difficulty" class="difficulty"></div>
+      </div>
+
+      <div id="levelBody"></div>
+
+      <div class="hint-row">
+        <button id="hintBtn" class="ghost">Ver ayuda</button>
+        <div id="hintText" class="hint-text"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Hecho para Cynthia ✨ · El progreso se guarda automáticamente.</footer>
+</main>
+
+<script defer src="game2.js"></script>
+</body>
+</html>
